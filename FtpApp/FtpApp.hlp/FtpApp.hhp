@@ -1,0 +1,24 @@
+[OPTIONS]
+Auto TOC=1
+Binary Index=No
+Compatibility=1.1 or later
+Compiled file=FtpApp.chm
+Contents file=FtpApp.hhc
+Default Font=Arial,12,0
+Default Window=Introduction
+Default topic=Introduction.htm
+Display compile progress=No
+Error log file=FtpApp.log
+Language=0x409 English (United States)
+Title=Test App Help
+
+[WINDOWS]
+Introduction="Introduction","FtpApp.hhc",,"Introduction.htm",,,,,,0x42120,,0x3006,,,,,,,,0
+
+
+[FILES]
+Introduction.htm
+Operations.htm
+
+[INFOTYPES]
+

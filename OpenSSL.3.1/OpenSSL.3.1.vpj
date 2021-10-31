@@ -1,0 +1,79 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+  Version="10.0"
+  VendorName="SlickEdit"
+  TemplateName="Other C/C++"
+  WorkingDir="."
+  AssociatedFile="OpenSSL.3.1.vcxproj"
+  AssociatedFileType="microsoft visual studio visual c++">
+  <Rules Name="Compile">
+    <Rule
+      InputExts="*.s"
+      OutputExts="*.o"
+      LinkObject="1">
+      <Exec CmdLine='as -o "%bd%n.o" "%f"'/>
+    </Rule>
+  </Rules>
+  <Config
+    Name="Debug|Win32"
+    Type="vcproj"
+    DebugCallbackName="windbg"
+    ObjectDir="Debug">
+    <Includes>
+      <Include Dir="%(INCLUDE)"/>
+    </Includes>
+    <Menu>
+      <Target
+        Name="Build Solution"
+        MenuCaption="Build Solution"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveAll"
+        RunFromDir="%rw"
+        ClearProcessBuffer="1">
+        <Exec CmdLine='"C:\Program Files\JPSoft\TCMD25\tcc"  BuildForWin "%bn" "%rp" static'/>
+      </Target>
+      <Target
+        Name="Clean Solution"
+        MenuCaption="Clean Solution"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveAll"
+        RunFromDir="%rw"
+        ClearProcessBuffer="1">
+        <Exec CmdLine='"C:\Program Files\JPSoft\TCMD25\tcc" nmake clean'/>
+      </Target>
+    </Menu>
+  </Config>
+  <Config
+    Name="Release|Win32"
+    Type="vcproj"
+    DebugCallbackName="windbg"
+    ObjectDir="Release">
+    <Includes>
+      <Include Dir="%(INCLUDE)"/>
+    </Includes>
+    <Menu>
+      <Target
+        Name="Build Solution"
+        MenuCaption="Build Solution"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveAll"
+        RunFromDir="%rw"
+        ClearProcessBuffer="1">
+        <Exec CmdLine='"C:\Program Files\JPSoft\TCMD25\tcc"  BuildForWin "%bn" "%rp" static'/>
+      </Target>
+      <Target
+        Name="Clean Solution"
+        MenuCaption="Clean Solution"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveAll"
+        RunFromDir="%rw"
+        ClearProcessBuffer="1">
+        <Exec CmdLine='"C:\Program Files\JPSoft\TCMD25\tcc" nmake clean'/>
+      </Target>
+    </Menu>
+  </Config>
+  <Files AutoFolders="DirectoryView">
+  </Files>
+  <List Name="RTE">
+  </List>
+</Project>

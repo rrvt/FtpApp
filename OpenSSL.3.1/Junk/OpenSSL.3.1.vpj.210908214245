@@ -1,0 +1,571 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+  Version="10.0"
+  VendorName="SlickEdit"
+  TemplateName="Microsoft Visual Studio 2017 C++"
+  WorkingDir="."
+  AssociatedFile="OpenSSL.3.1.vcxproj"
+  AssociatedFileType="microsoft visual studio visual c++">
+  <Config
+    Name="Debug|Win32"
+    Type="vcproj"
+    DebugCallbackName="windbg"
+    OutputFile=""
+    CompilerConfigName="Visual Studio 2017">
+    <Includes>
+      <Include Dir="%(INCLUDE)"/>
+    </Includes>
+    <Menu>
+      <Target
+        Name="Compile"
+        MenuCaption="&amp;Compile"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveCurrent"
+        RunFromDir="%rw">
+        <Exec CmdLine="vstudiocompile"/>
+      </Target>
+      <Target
+        Name="Build"
+        MenuCaption="&amp;Build"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"%sf" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Rebuild"
+        MenuCaption="&amp;Rebuild"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"%sf:Rebuild" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Debug"
+        MenuCaption="&amp;Debug"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec
+          CmdLine="vcproj_visual_studio_debug"
+          Type="Slick-C"/>
+      </Target>
+      <Target
+        Name="DebugVisualStudio"
+        MenuCaption="Debug - Visual Studio"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec CmdLine='devenv "%w"'/>
+      </Target>
+      <Target
+        Name="DebugWinDbg"
+        MenuCaption="Debug - WinDbg"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec
+          CmdLine="vcproj_windbg_debug"
+          Type="Slick-C"/>
+      </Target>
+      <Target
+        Name="Execute"
+        MenuCaption="E&amp;xecute"
+        SaveOption="SaveNone"
+        CaptureOutputWith="ProcessBuffer"
+        RunFromDir="%rw">
+        <Exec CmdLine='"%o"'/>
+      </Target>
+      <Target
+        Name="Resource Editor"
+        MenuCaption="Resource Editor"
+        ShowOnMenu="HideIfNoCmdLine"
+        SaveOption="SaveWorkspaceFiles"
+        CaptureOutputWith="ProcessBuffer"
+        RunFromDir="%rw">
+        <Exec CmdLine="devenv"/>
+      </Target>
+      <Target
+        Name="Build Solution"
+        MenuCaption="Build Solution"
+        ShowOnMenu="HideIfNoCmdLine"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"Build" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Clean Solution"
+        MenuCaption="Clean Solution"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"Clean" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Clean Project"
+        MenuCaption="Clean Project"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"%sf:Clean" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+    </Menu>
+  </Config>
+  <Config
+    Name="Release|Win32"
+    Type="vcproj"
+    DebugCallbackName="windbg"
+    OutputFile=""
+    CompilerConfigName="Visual Studio 2017">
+    <Includes>
+      <Include Dir="%(INCLUDE)"/>
+    </Includes>
+    <Menu>
+      <Target
+        Name="Compile"
+        MenuCaption="&amp;Compile"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveCurrent"
+        RunFromDir="%rw">
+        <Exec CmdLine="vstudiocompile"/>
+      </Target>
+      <Target
+        Name="Build"
+        MenuCaption="&amp;Build"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"%sf" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Rebuild"
+        MenuCaption="&amp;Rebuild"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"%sf:Rebuild" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Debug"
+        MenuCaption="&amp;Debug"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec
+          CmdLine="vcproj_visual_studio_debug"
+          Type="Slick-C"/>
+      </Target>
+      <Target
+        Name="DebugVisualStudio"
+        MenuCaption="Debug - Visual Studio"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec CmdLine='devenv "%w"'/>
+      </Target>
+      <Target
+        Name="DebugWinDbg"
+        MenuCaption="Debug - WinDbg"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec
+          CmdLine="vcproj_windbg_debug"
+          Type="Slick-C"/>
+      </Target>
+      <Target
+        Name="Execute"
+        MenuCaption="E&amp;xecute"
+        SaveOption="SaveNone"
+        CaptureOutputWith="ProcessBuffer"
+        RunFromDir="%rw">
+        <Exec CmdLine='"%o"'/>
+      </Target>
+      <Target
+        Name="Resource Editor"
+        MenuCaption="Resource Editor"
+        ShowOnMenu="HideIfNoCmdLine"
+        SaveOption="SaveWorkspaceFiles"
+        CaptureOutputWith="ProcessBuffer"
+        RunFromDir="%rw">
+        <Exec CmdLine="devenv"/>
+      </Target>
+      <Target
+        Name="Build Solution"
+        MenuCaption="Build Solution"
+        ShowOnMenu="HideIfNoCmdLine"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"Build" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Clean Solution"
+        MenuCaption="Clean Solution"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"Clean" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Clean Project"
+        MenuCaption="Clean Project"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"%sf:Clean" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+    </Menu>
+  </Config>
+  <Config
+    Name="Debug|x64"
+    Type="vcproj"
+    DebugCallbackName="windbg"
+    OutputFile=""
+    CompilerConfigName="Visual Studio 2017">
+    <Includes>
+      <Include Dir="%(INCLUDE)"/>
+    </Includes>
+    <Menu>
+      <Target
+        Name="Compile"
+        MenuCaption="&amp;Compile"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveCurrent"
+        RunFromDir="%rw">
+        <Exec CmdLine="vstudiocompile"/>
+      </Target>
+      <Target
+        Name="Build"
+        MenuCaption="&amp;Build"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"%sf" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Rebuild"
+        MenuCaption="&amp;Rebuild"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"%sf:Rebuild" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Debug"
+        MenuCaption="&amp;Debug"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec
+          CmdLine="vcproj_visual_studio_debug"
+          Type="Slick-C"/>
+      </Target>
+      <Target
+        Name="DebugVisualStudio"
+        MenuCaption="Debug - Visual Studio"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec CmdLine='devenv "%w"'/>
+      </Target>
+      <Target
+        Name="DebugWinDbg"
+        MenuCaption="Debug - WinDbg"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec
+          CmdLine="vcproj_windbg_debug"
+          Type="Slick-C"/>
+      </Target>
+      <Target
+        Name="Execute"
+        MenuCaption="E&amp;xecute"
+        SaveOption="SaveNone"
+        CaptureOutputWith="ProcessBuffer"
+        RunFromDir="%rw">
+        <Exec CmdLine='"%o"'/>
+      </Target>
+      <Target
+        Name="Resource Editor"
+        MenuCaption="Resource Editor"
+        ShowOnMenu="HideIfNoCmdLine"
+        SaveOption="SaveWorkspaceFiles"
+        CaptureOutputWith="ProcessBuffer"
+        RunFromDir="%rw">
+        <Exec CmdLine="devenv"/>
+      </Target>
+      <Target
+        Name="Build Solution"
+        MenuCaption="Build Solution"
+        ShowOnMenu="HideIfNoCmdLine"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"Build" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Clean Solution"
+        MenuCaption="Clean Solution"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"Clean" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Clean Project"
+        MenuCaption="Clean Project"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"%sf:Clean" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+    </Menu>
+  </Config>
+  <Config
+    Name="Release|x64"
+    Type="vcproj"
+    DebugCallbackName="windbg"
+    OutputFile=""
+    CompilerConfigName="Visual Studio 2017">
+    <Includes>
+      <Include Dir="%(INCLUDE)"/>
+    </Includes>
+    <Menu>
+      <Target
+        Name="Compile"
+        MenuCaption="&amp;Compile"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveCurrent"
+        RunFromDir="%rw">
+        <Exec CmdLine="vstudiocompile"/>
+      </Target>
+      <Target
+        Name="Build"
+        MenuCaption="&amp;Build"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"%sf" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Rebuild"
+        MenuCaption="&amp;Rebuild"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"%sf:Rebuild" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Debug"
+        MenuCaption="&amp;Debug"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec
+          CmdLine="vcproj_visual_studio_debug"
+          Type="Slick-C"/>
+      </Target>
+      <Target
+        Name="DebugVisualStudio"
+        MenuCaption="Debug - Visual Studio"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec CmdLine='devenv "%w"'/>
+      </Target>
+      <Target
+        Name="DebugWinDbg"
+        MenuCaption="Debug - WinDbg"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec
+          CmdLine="vcproj_windbg_debug"
+          Type="Slick-C"/>
+      </Target>
+      <Target
+        Name="Execute"
+        MenuCaption="E&amp;xecute"
+        SaveOption="SaveNone"
+        CaptureOutputWith="ProcessBuffer"
+        RunFromDir="%rw">
+        <Exec CmdLine='"%o"'/>
+      </Target>
+      <Target
+        Name="Resource Editor"
+        MenuCaption="Resource Editor"
+        ShowOnMenu="HideIfNoCmdLine"
+        SaveOption="SaveWorkspaceFiles"
+        CaptureOutputWith="ProcessBuffer"
+        RunFromDir="%rw">
+        <Exec CmdLine="devenv"/>
+      </Target>
+      <Target
+        Name="Build Solution"
+        MenuCaption="Build Solution"
+        ShowOnMenu="HideIfNoCmdLine"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveWorkspaceFiles"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"Build" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Clean Solution"
+        MenuCaption="Clean Solution"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"Clean" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+      <Target
+        Name="Clean Project"
+        MenuCaption="Clean Project"
+        CaptureOutputWith="ProcessBuffer"
+        SaveOption="SaveNone"
+        RunFromDir="%rw">
+        <Exec CmdLine='msbuild "%w" /t:"%sf:Clean" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+      </Target>
+    </Menu>
+  </Config>
+  <Files AutoFolders="DirectoryView">
+    <Folder Name="apps">
+    </Folder>
+    <Folder Name="Configurations">
+      <Folder Name="platform">
+        <Folder Name="Windows">
+        </Folder>
+      </Folder>
+    </Folder>
+    <Folder Name="crypto">
+      <Folder Name="aes">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="asn1">
+      </Folder>
+      <Folder Name="bf">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="bn">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="camellia">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="cast">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="chacha">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="conf">
+      </Folder>
+      <Folder Name="des">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="ec">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="md5">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="modes">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="objects">
+      </Folder>
+      <Folder Name="perlasm">
+      </Folder>
+      <Folder Name="poly1305">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="rc4">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="rc5">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="ripemd">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="sha">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+      <Folder Name="whrlpool">
+        <Folder Name="asm">
+        </Folder>
+      </Folder>
+    </Folder>
+    <Folder Name="Debug">
+      <Folder Name="bin">
+      </Folder>
+      <Folder Name="misc">
+      </Folder>
+    </Folder>
+    <Folder Name="doc">
+    </Folder>
+    <Folder Name="engines">
+      <Folder Name="asm">
+      </Folder>
+    </Folder>
+    <Folder Name="external">
+      <Folder Name="perl">
+        <Folder Name="Text-Template-1.56">
+          <Folder Name="lib">
+            <Folder Name="Text">
+              <Folder Name="Template">
+              </Folder>
+            </Folder>
+          </Folder>
+        </Folder>
+      </Folder>
+    </Folder>
+    <Folder Name="fuzz">
+    </Folder>
+    <Folder Name="ms">
+    </Folder>
+    <Folder Name="providers">
+      <Folder Name="common">
+        <Folder Name="der">
+        </Folder>
+      </Folder>
+    </Folder>
+    <Folder Name="test">
+      <Folder Name="recipes">
+        <Folder Name="61-test_bio_prefix_data">
+        </Folder>
+      </Folder>
+      <Folder Name="ssl-tests">
+      </Folder>
+    </Folder>
+    <Folder Name="tools">
+    </Folder>
+    <Folder Name="util">
+      <Folder Name="perl">
+        <Folder Name="OpenSSL">
+          <Folder Name="Config">
+          </Folder>
+          <Folder Name="Test">
+          </Folder>
+          <Folder Name="Util">
+          </Folder>
+        </Folder>
+        <Folder Name="TLSProxy">
+        </Folder>
+      </Folder>
+    </Folder>
+    <Folder Name="VMS">
+    </Folder>
+  </Files>
+  <List Name="RTE">
+  </List>
+</Project>

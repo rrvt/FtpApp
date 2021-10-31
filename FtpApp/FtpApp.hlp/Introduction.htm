@@ -1,0 +1,49 @@
+<!doctype html>
+<html><!-- InstanceBegin template="/Templates/OneColumnPage.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta charset="utf-8">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Introduction</title>
+<!-- InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<link href="App.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="container">
+<div class="content">
+<!-- InstanceBeginEditable name="Title" -->
+<h1>FtpApp</h1>
+<!-- InstanceEndEditable -->
+
+<!-- InstanceBeginEditable name="Body" -->
+<h2>Introduction</h2>
+<p>
+FTP App is an application designed to perform FTP operations to a website that requires encrypted login but unencrypted
+ftp operations.  It uses OpenSSL to perform the encrypted operations.
+</p>
+<p>
+The application maintains a database for each web site.  Each file in the website is represented in 
+the database file.  In particular the size and the modification date of the local and remote files is kept.
+Then when changes are made to the local files, the application compares the sizes and dates to determine
+if the local file needs to be sent to the database or the remote file needs to be copied back to the local
+directory.  If the file was deleted from the web site since the database was created or since the last update then the application will ask if the file should be deleted from the web site.
+</p>
+<p>
+All the operations are explained in detail on the <a href="Operations.htm">Operations Page</a>. 
+here is the list of operations:
+</p>
+<ul>
+<li>Create Web Site Database</li>
+<li>Login to Web Site Database</li>
+<li>Compare Current Web Site To Database</li>
+<li>Confirm One or More Updates</li>
+<li>Save Database</li>
+</ul>
+<!-- InstanceEndEditable -->
+</div><!-- end .content -->
+</div><!-- end .container -->
+</body>
+<!-- InstanceEnd --></html>

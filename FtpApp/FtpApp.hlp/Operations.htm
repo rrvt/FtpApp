@@ -1,0 +1,100 @@
+<!doctype html>
+<html><!-- InstanceBegin template="/Templates/OneColumnPage.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta charset="utf-8">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Operations</title>
+<!-- InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<link href="App.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="container">
+<div class="content">
+<!-- InstanceBeginEditable name="Title" -->
+<h1>FTP App Operations</h1>
+<!-- InstanceEndEditable -->
+
+<!-- InstanceBeginEditable name="Body" -->
+
+<h2><img src="Images/FileTree.jpg" width="16" height="15"> Create Web Site Database</h2>
+<p>
+Create a new database for a web site.  Requires the path to the local files, a name for the web site, the
+ftp name of the web site (e.g. "swde.com"), the user id to web host for the web site ftp access and the 
+password for the ftp access.
+</p>
+<h2><img src="Images/OpenFile.jpg" width="16" height="15"> Login to Known Web Site</h2>
+<p>
+Once the web site database has been created, one can switch from one database file to another with this
+operation.  A list of web site databases is given in a dialog box and the user may select one.
+</p>
+<p>
+Note:  The last database is opened when the application starts up.  This command allows the user 
+to choose another website to process.
+</p>
+
+<h2><img src="Images/Comparison.jpg" width="16" height="15"> Determine Files to Update</h2>
+<p>
+Creates a list of all the files in the web site that are new, changed, need retrieving from the web 
+host or need deleting on the web host.  It does this be creating a new list of all the files on the 
+web site and in the local version of the web site including the size and date in both places and 
+comparing the new list with the old list.  Then it is compared to an earlier version of the database.
+For example, when a file in the local web site list changes its date or size the file is "put" to the
+remote site.  There are several conditions that the application uses to determine which files are affected.
+</p>
+
+<h2><img src="Images/WWW.jpg" width="16" height="15"> Confirm Updates</h2>
+<p>
+The list of changes or updates produced by the "Determine..." command is presented in a dialog box with
+check boxes by each entry.  The operation is indicated for the file. One can check one or more 
+entries to update or select the button that will select all the entries.
+</p>
+<p>
+The ftp operations are performed and then the database is updated to reflect the new state of the
+web site local and remote files.  Finally the database is saved.
+</p>
+
+<h2><img src="Images/Refresh.jpg" width="16" height="15"> Refresh Database</h2>
+<p>
+Just a safety net to update the current web sites database with the current state of the 
+files at both the local and remote sites.
+</p>
+
+<h2><img src="Images/SaveLog.jpg" width="16" height="15"> Save File As</h2>
+<p>
+Displays a Save File Dialog and saves the file to the file named. 
+A backup file is created that has a time-stamped extension. Only five backups will be maintained.
+</p>
+
+<h2><img src="Images/PrintLog.jpg" width="16" height="15"> Print</h2>
+<p>
+Will do all the normal things to print the database file.
+</p>
+
+<h2><img src="Images/Options.jpg" width="16" height="15"> Options</h2>
+<p>
+The options dialog allows specifying the Display and Printer Font Size Scale Factor, the printer
+orientation and the printer margins.
+</p>
+
+<h2><img src="Images/DeleteSite.jpg" width="16" height="15"> Delete Web Site Data</h2>
+<p>
+Delete the current web site data.  The local web site is not distrubed nor is the remote site.
+</p>
+
+<h2><img src="Images/About.jpg" width="16" height="15"> About</h2>
+<p>
+Displays the About Box.  The about box uses text from the resource file (TestApp.rc) for
+the output information.  There is a standard about box dialog in the Library.
+</p>
+
+<h2><img src="Images/Exit.jpg" width="16" height="15"> Exit</h2>
+<p>Exit the application with no reservations.</p>
+<!-- InstanceEndEditable -->
+</div><!-- end .content -->
+</div><!-- end .container -->
+</body>
+<!-- InstanceEnd --></html>

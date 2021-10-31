@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FtpAppHelp", "..\FtpApp.hlp\FtpAppHelp.vcxproj", "{4E041259-6816-42D9-AFEA-9304A590F5D2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FtpApp", "..\FtpApp.prj\FtpApp.vcxproj", "{4951D647-AB68-408B-B26B-8323DA562B68}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4E041259-6816-42D9-AFEA-9304A590F5D2} = {4E041259-6816-42D9-AFEA-9304A590F5D2}
+		{CF57F3EC-D3DB-4469-8519-3F9D73785D9B} = {CF57F3EC-D3DB-4469-8519-3F9D73785D9B}
+		{B52E15F8-382E-4584-B841-04EB5C7072FC} = {B52E15F8-382E-4584-B841-04EB5C7072FC}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Library", "..\..\Library\Library.prj\Library.vcxproj", "{CF57F3EC-D3DB-4469-8519-3F9D73785D9B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenSSL.3.1", "..\..\OpenSSL.3.1\OpenSSL.3.1.vcxproj", "{B52E15F8-382E-4584-B841-04EB5C7072FC}"
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "..\Installer.prj\Installer.wixproj", "{10FF59FC-FEE6-426C-8399-FC93BBDB03A5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4951D647-AB68-408B-B26B-8323DA562B68} = {4951D647-AB68-408B-B26B-8323DA562B68}
+		{4E041259-6816-42D9-AFEA-9304A590F5D2} = {4E041259-6816-42D9-AFEA-9304A590F5D2}
+		{50000E9F-5994-4082-8FD0-69F32EFD766D} = {50000E9F-5994-4082-8FD0-69F32EFD766D}
+		{CF57F3EC-D3DB-4469-8519-3F9D73785D9B} = {CF57F3EC-D3DB-4469-8519-3F9D73785D9B}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FtpLib", "..\..\FtpLib\FtpLib.prj\FtpLib.vcxproj", "{50000E9F-5994-4082-8FD0-69F32EFD766D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E041259-6816-42D9-AFEA-9304A590F5D2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4E041259-6816-42D9-AFEA-9304A590F5D2}.Debug|Win32.Build.0 = Debug|Win32
+		{4E041259-6816-42D9-AFEA-9304A590F5D2}.Release|Win32.ActiveCfg = Release|Win32
+		{4E041259-6816-42D9-AFEA-9304A590F5D2}.Release|Win32.Build.0 = Release|Win32
+		{4951D647-AB68-408B-B26B-8323DA562B68}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4951D647-AB68-408B-B26B-8323DA562B68}.Debug|Win32.Build.0 = Debug|Win32
+		{4951D647-AB68-408B-B26B-8323DA562B68}.Release|Win32.ActiveCfg = Release|Win32
+		{4951D647-AB68-408B-B26B-8323DA562B68}.Release|Win32.Build.0 = Release|Win32
+		{CF57F3EC-D3DB-4469-8519-3F9D73785D9B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CF57F3EC-D3DB-4469-8519-3F9D73785D9B}.Debug|Win32.Build.0 = Debug|Win32
+		{CF57F3EC-D3DB-4469-8519-3F9D73785D9B}.Release|Win32.ActiveCfg = Release|Win32
+		{CF57F3EC-D3DB-4469-8519-3F9D73785D9B}.Release|Win32.Build.0 = Release|Win32
+		{B52E15F8-382E-4584-B841-04EB5C7072FC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B52E15F8-382E-4584-B841-04EB5C7072FC}.Release|Win32.ActiveCfg = Release|Win32
+		{10FF59FC-FEE6-426C-8399-FC93BBDB03A5}.Debug|Win32.ActiveCfg = Debug|x86
+		{10FF59FC-FEE6-426C-8399-FC93BBDB03A5}.Release|Win32.ActiveCfg = Release|x86
+		{10FF59FC-FEE6-426C-8399-FC93BBDB03A5}.Release|Win32.Build.0 = Release|x86
+		{50000E9F-5994-4082-8FD0-69F32EFD766D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{50000E9F-5994-4082-8FD0-69F32EFD766D}.Debug|Win32.Build.0 = Debug|Win32
+		{50000E9F-5994-4082-8FD0-69F32EFD766D}.Release|Win32.ActiveCfg = Release|Win32
+		{50000E9F-5994-4082-8FD0-69F32EFD766D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05E9E825-3293-471C-B97A-64E2E1CEEC87}
+	EndGlobalSection
+EndGlobal
