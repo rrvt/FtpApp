@@ -90,14 +90,12 @@ magnus kulke.  I've reorganized those ideas into multiple classes with different
 
 ### OpenSSL
 
-I've included the OpenSSL.3.1 library to make sure that the application can be built.  Having said that,
-it is compiled only for the libraries that are needed by the Ftp Library.  It compiles into two libraries
-that are referenced in FtpApp.
+I've used OpenSSL.3.1 in the build.  it is compiled only for the libraries that are needed by the
+Ftp Library.  It compiles into two libraries that are referenced in FtpApp.
 
 Compiling OpenSSL is a big, complex process best left to the originators of OpenSSL.  So there is a
-command file (i.e. BuildForWin.cmd) that runs in JP Software's Take Command (i.e. a third party
-DOS box) that will build the OpenSSL libraries,
-test files, OpenSSL, and other miscellaneous features.  The command file, BuildForWin.cmd, also
+command/script file (i.e. BuildForWin.cmd) that will build the OpenSSL libraries, test files,
+OpenSSL, and other miscellaneous features.  The command file, BuildForWin.cmd, also
 initializes the nMake facility for Visual Studio.  BuildForWin.cmd accepts three arguments:
 
   * The Configuration (Debug or Release)
@@ -105,7 +103,61 @@ initializes the nMake facility for Visual Studio.  BuildForWin.cmd accepts three
   * The word "static" to indicate static libraries.
 
 Since it takes a long time to run this command file, it is not compiled when the other projects are
-compiled.
+compiled.  Here is the command/script file:
+
+```
+rem first argument is the configuration (i.e. Debug or Release)
+rem second argument is path to openSSL directory base (e.g. D:\Sources\OpenSSL.3.1\)
+rem third argument is "static" to indicate a static library (rather than a dll library)
+
+rem   "C:\Program Files\JPSoft\TCMD25\tcc"  BuildForWin "%bn" "%rp" static
+
+echo on
+
+set Configuration=%1
+set WorkSpace=%2
+
+set OpenSSLsrc=%WorkSpace%
+
+set OpenSSLtgt=%OpenSSLsrc%%Configuration%\
+
+set Dirs=--prefix=%OpenSSLtgt% --openssldir=%OpenSSLtgt% --libdir=..\%Configuration%
+
+iff "%Configuration%" == "Debug" then
+  set flavor=--debug
+else
+  set flavor=--release
+endiff
+
+iff "%3" == "static" then
+  set Static=no-shared
+else
+  set Static=
+endiff
+
+rem Setup Compiler system variables -- required for nmake to run
+
+set VS2017="C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvars32.bat"
+CALL %VS2017%
+
+rem Create makefile
+
+md /d/Ne %OpenSSLsrc%
+
+perl Configure %flavor%  %Dirs% %Static% no-capieng VC-WIN32
+
+nmake
+nmake test
+nmake install
+exit
+```
+
+The command/script is run in jpsoftware's Take Command (i.e. tcc). Their websit is https://jpsoft.com/.
+
+```
+tcc  BuildForWin Release D:\Sources\OpenSSL.3.1\ static
+```
+
 
 ## Prerequisites
 

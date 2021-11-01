@@ -90,9 +90,8 @@ magnus kulke.  I've reorganized those ideas into multiple classes with different
 
 ### OpenSSL
 
-I've included the OpenSSL.3.1 library to make sure that the application can be built.  Having said that,
-it is compiled only for the libraries that are needed by the Ftp Library.  It compiles into two libraries
-that are referenced in FtpApp.
+I've used OpenSSL.3.1 in the build.  it is compiled only for the libraries that are needed by the
+Ftp Library.  It compiles into two libraries that are referenced in FtpApp.
 
 Compiling OpenSSL is a big, complex process best left to the originators of OpenSSL.  So there is a
 command/script file (i.e. BuildForWin.cmd) that will build the OpenSSL libraries, test files,
