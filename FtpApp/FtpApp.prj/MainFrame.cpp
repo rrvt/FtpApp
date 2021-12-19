@@ -62,9 +62,7 @@ int MainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
   }
 
 
-void MainFrame::setupToolBar() {
-  toolBar.install();
-  }
+void MainFrame::setupToolBar() { }
 
 
 // MainFrame message handlers

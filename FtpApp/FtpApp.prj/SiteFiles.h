@@ -74,7 +74,7 @@ private:
 
 class SiteFiles;
 
-typedef RcdPtrT<SiteFile> SiteFileP;
+typedef DatumPtrT<SiteFile> SiteFileP;
 typedef IterT<SiteFiles, SiteFile> FilesIter;         // Iterator Declaration
 
 

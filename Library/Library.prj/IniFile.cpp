@@ -126,30 +126,6 @@ CFile cFile(iniFilePath, CFile::modeWrite);
   }
 
 
-
-#if 0
-Tchar* IniFile::startReadSection() {
-int n;
-
-  if (!buf) {NewArray(Tchar);   buf = AllocArray(BufSize); p = buf;}
-
-  n = GetPrivateProfileString(0, 0, 0, buf, BufSize, iniFilePath);
-
-  q = p + n;  return getSection();
-  }
-
-
-Tchar* IniFile::nextSection() {
-
-  if (!p) {return 0;}
-
-  p += _tcslen(p) + 1; return getSection();
-  }
-
-#endif
-
-
-
 void IniFile::deleteString(TCchar* section, TCchar* key) {
   WritePrivateProfileString(section, key, 0, iniFilePath);
   }

@@ -11,13 +11,10 @@ class MainFrame : public CMainFrm {
 CMFCMenuBar   m_wndMenuBar;
 ToolBar       toolBar;
 CMFCStatusBar m_wndStatusBar;
-CMenu         menu;
-CMenu         menu2;
 
 protected:                                          // create from serialization only
 
   MainFrame() noexcept;
-
 
   DECLARE_DYNCREATE(MainFrame)
 
@@ -29,7 +26,7 @@ public:                                             // Overrides
 
   void     setupToolBar();
 
-  ToolBar* getToolBar() {return &toolBar;}
+  ToolBar& getToolBar() {return toolBar;}
 
 #ifdef _DEBUG
   virtual void AssertValid() const;

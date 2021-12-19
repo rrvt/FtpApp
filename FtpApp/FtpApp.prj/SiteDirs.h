@@ -37,7 +37,7 @@ private:
 
 class SiteDirs;
 
-typedef RcdPtrT<SiteDir> SiteDirP;
+typedef DatumPtrT<SiteDir> SiteDirP;
 typedef IterT<SiteDirs, SiteDir> DirIter;                       // Iterator declaration
 
 

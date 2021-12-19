@@ -17,7 +17,7 @@
 
 
 class FtpStore;
-typedef RcdPtrT<FtpDatum> FtpDatumP;                      // Usually defined just before iterator
+typedef DatumPtrT<FtpDatum> FtpDatumP;                      // Usually defined just before iterator
 typedef IterT<FtpStore, FtpDatum> FtpStrIter;             // Iterator over array of Datuss
 
 
