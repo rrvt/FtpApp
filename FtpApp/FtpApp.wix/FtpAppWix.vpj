@@ -4,7 +4,7 @@
   VendorName="SlickEdit"
   TemplateName="Microsoft Visual Studio 2017"
   WorkingDir="."
-  AssociatedFile="Installer.wixproj"
+  AssociatedFile="FtpAppWix.wixproj"
   AssociatedFileType="microsoft visual studio">
   <Config
     Name="Debug|x86"
