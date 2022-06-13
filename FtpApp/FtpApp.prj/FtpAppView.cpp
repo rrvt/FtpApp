@@ -1,5 +1,4 @@
-// In the MFC doc/view organization most of the work of displaying something in the window and printing
-// something is done in this module (along with CScrView and NotePad where never changing stuff is done).
+// FtpAppView.cpp : implementation of the FtpAppView class
 
 
 #include "stdafx.h"
@@ -66,6 +65,7 @@ void FtpAppView::OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo) {
 
   switch(doc()->dataSrc()) {
     case NotePadSrc : setOrientation(options.orient); break;    // Setup separate Orientation?
+    case StoreSrc   : setOrientation(options.orient); break;
     }
   setPrntrOrient(theApp.getDevMode(), pDC);   CScrView::OnBeginPrinting(pDC, pInfo);
   }
@@ -89,6 +89,7 @@ void FtpAppView::OnEndPrinting(CDC* pDC, CPrintInfo* pInfo) {
 
   switch(doc()->dataSrc()) {
     case NotePadSrc : break;
+    case StoreSrc   : break;
     }
   }
 
@@ -99,6 +100,7 @@ void FtpAppView::OnSetFocus(CWnd* pOldWnd) {
 
   switch(doc()->dataSrc()) {
     case NotePadSrc : break;
+    case StoreSrc   : break;
     }
   }
 
@@ -115,4 +117,3 @@ FtpAppDoc* FtpAppView::GetDocument() const
   {ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(FtpAppDoc))); return (FtpAppDoc*)m_pDocument;}
 
 #endif //_DEBUG
-

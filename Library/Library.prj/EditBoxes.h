@@ -22,7 +22,7 @@ ExpandableP<EditBox, EditBoxP, 2> boxes;
 public:
 
   EditBoxes() : view(0) {}
- ~EditBoxes() { }
+ ~EditBoxes() {boxes.clear();}
 
   void    setView(CWnd* v) {view = v;}
 
@@ -45,7 +45,7 @@ public:
 
   HWND    getHWND(int x) {EditBox* eb = datum(x); return eb ? eb->m_hWnd : 0;}
 
-  String getInitialVal(int x) {EditBox* eb = datum(x); return eb ? eb->initialVal : _T("");}
+  String getInitialVal(int x) {EditBox* eb = datum(x); return eb ? eb->initialVal : String(_T(""));}
 
   BoxType getBoxType(int x) {EditBox* eb = datum(x); return eb ? eb->boxType : NilBox;}
   int     count() {return nData();}

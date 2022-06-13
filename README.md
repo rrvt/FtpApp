@@ -16,31 +16,50 @@ and I am able to update the web site with it.  However it requires the user to f
 need updating.  Filezilla helps by highlighting various files it deems might require updating but there
 a lot of false positives.  FtpApp attempts to make this job easier.
 
-The first task the user must perform is to create a database containing all the files on the local
-and remote web site directories.  Then at some later time (could be seconds or months) the user
-must run a command to create a current list of files on the local and remote web site directories.
-After the current list is constructed it is compared with the older version.  Any file that has changed
-or is not on the web site but is on the local site is placed in a third list.  Any files in a
-remote web site directory and not on the local web site directory is also placed on this third list.
-An indicator accompanies each file on the difference list (this third list) which defines why the
-file is on the list.  Finally the user may select files to update (or select update all the files).
+The first task the user must perform is to create a database containing all the files on web site.
+The goal is to get a list of all the files that are needed by the web site host with size and date
+attributes that are consistent with the local version of the web site.  Unfortunately, many web hosts
+use Unix/Linix server and the file sizes are different for text files (Linix does not require a
+line feed to help define lines whereas Windows does).  Furthermore dates at a web host are not
+necessarily consisten with either the uploading of the file or the dates on the local copy of a file.
 
-Now how would the appication know that a change has occurred.  Since the older list contains the size
-and date of the each file, the new file list can compare the date and size of each file on the local
-site.  Any changes then are obvious.  Please note that the remote sizes and dates are not reliable
-indicators of change as different operating systems require different end of line sequences which make
-the sizes different.  Also the dates the files are created on the remote and local sites are by
-definition different and the OS on the remote site can change them at any time (e.g. recovery, movement).
+The dilema is resolved in FtpApp by saving the local file attributes after a file is uploaded to the web
+host.  Thus the next time changes are made to the local files a comparison may be made with the
+assurance that only changed files will be noted.  Comparison is made using the files size and
+modification date.
+
+However, there is a little issue at the beginning.  If the web site already exists and FtpApp is
+being used for the first time to update the web site then there is not past history database for
+the web site.  In this case, the web host is contacted and all the web site files are downloaded and
+placed in the "Previous" version of the web site.  Since the dates and sizes are probably all
+different for the previous and current local site, they will all need to be uploaded so that
+the web host and local files are consistent and the "previous" files list is updated with the local
+files date and size.  After the initial upload FtpApp will only indicate changed fiels for uploading.
+
+And there is one other case.  Suppose one does not have a local copy of the web site.  There is a
+command to download all the files from the web host.  This will establish a local copy and save the
+date and size of the local copy of the files in the "Previous" database for the web site.
 
 Furthermore, since both lists include all files on both sites it is possible to discover new files and
 old files.  If a file exists in the local site in the older list and doesn't exist in the current list
 but still exists on the remote site then it has probably been deleted for the local site and should be
 deleted from the remote site.
 
+It should also be noted that changes suggested by FtpApp must be confirmed by checking a box for each
+file for which an action is suggested (or selecting the "Check All" button).
+
 In any event this application works more like Dreamweaver in that it alerts the user to files that
 need updating on the web site and facilitating the update.
 
 ## Updates
+
+### Update 6/12/22
+
+Complete rewrite of the FtpLib obtained off the web.  One issue was the lack of a user molification
+output during long running sequences.  So the long running sequences were put into a "Worker Thread"
+and the function then sent an update to a "Progress Bar" in the UI Thread (the main Thread).  In one
+case the file that was transferred is also displayed in the main window just after the transfer takes
+place (with the usual caviot that Windows messages don't happen instantly).
 
 ### Update 01/31/22
 
@@ -74,14 +93,15 @@ Added some comments, removed unused code, general cleanup...
 
 ## Getting Started
 
-This version was created with Visual Studion 2017.  It was compiled with the following properties:
+This version was created with Visual Studion 2022.  It was compiled with the following properties:
 
-  o Windows SDK Version: 10.0.18362.0
-  o Platform Toolset: visual Studio 2017 (v141)
+  o Windows SDK Version: Latest Win10 SDK
+  o Platform Toolset: visual Studio 2022 (v141)
   o MFC: Use MFC in a Shared DLL
   o Character Set:  Use Unicode Character Set
   o Precompiled Header:  Not Using Precompiled Headers
   o Linker/Additional Dependencies:  Htmlhelp.lib, OpenSSL.3.1\libssl.lib, OpenSSL.3.1\libcrypto.lib
+  o OpenSSL.3.1 compiled separately for both debug and release.  Details below...
 
 The HTML Help Workshop (HHW), Version 4.74.8702.0 was used to prepare the help file (WixApp.chm).  It is
 copied into the Release directory.  I used Dreamweaver (DW) to do most of the content production of the

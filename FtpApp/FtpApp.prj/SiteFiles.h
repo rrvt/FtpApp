@@ -6,70 +6,55 @@
 #include "ExpandableP.h"
 #include "IterT.h"
 
-
 class CSVLex;
 class CSVOut;
+class Archive;
+
+
+enum   SiteFlSts {NilSts, PutSts, GetSts, DelSts};
 
 
 class SiteFile {
 public:
 
-String name;                          // File Name, e.g. index.htm
-String path;                          // Local Path of the file starting at the root of the web site
-                                      // tree, e.g. if the local path to swde is "D:\Web\swde\index.htm"
-                                      // then site.rootPath is "D:\Web\swde" and path would be
-                                      // "\index.htm".
-                                      // Note:  using the Windows separator '\' here
-int    localSize;
-Date   localDate;
+SiteFlSts status;
+bool      check;
 
-int    remoteSize;
-Date   remoteDate;
+String    name;             // Name of file, <name>.<ext>
+String    path;             // Relative to Root Path, key for Sort,
+int       size;
+Date      date;
 
-enum   Status {NilStatus, PutFile, GetFile, Changed, Delete};
-Status status;
-bool   webPresent;
-bool   update;
-
-  SiteFile() : localSize(0), localDate(Date::MinDate), remoteSize(0), remoteDate(Date::MinDate),
-                                                  status(NilStatus), webPresent(false), update(false) { }
+  SiteFile() : status(NilSts), check(false), size(0), date(Date::MinDate) { }
  ~SiteFile() { }
 
   SiteFile(SiteFile& siteFile) {copy(siteFile);}                            // copy data
   SiteFile& operator= (SiteFile& siteFile) {copy(siteFile); return *this;}
 
-  bool   operator>= (SiteFile& siteFile) {return path >= siteFile.path;}  // Allows sorted data
-  bool   operator== (SiteFile& siteFile) {return path == siteFile.path;}
+  // Allows sorted data
+  bool   operator>= (SiteFile& siteFile) {return _tcsicmp(path, siteFile.path) >= 0;}
+  bool   operator== (SiteFile& siteFile) {return _tcsicmp(path, siteFile.path) == 0;}
 
-  bool   set(TCchar* pth);
-  void   setWebAttr();
-  void   setLclAttr();
-  bool   getFile();
-  bool   putFile();
+  // Required for Binary Search
+  bool operator== (TCchar* path) {return _tcsicmp(this->path, path) == 0;}
+  bool operator<  (TCchar* path) {return _tcsicmp(this->path, path) <  0;}
+  bool operator>  (TCchar* path) {return _tcsicmp(this->path, path) >  0;}
 
-  bool   delFile();
-
-  void   display();
-  void   dspUpdate();
+  void   addLclAttr(TCchar* path);
 
   bool   load(CSVLex& lex);
   void   save(CSVOut& csvOut);
 
+  void   display();
+
 private:
 
-  bool filter();
-
-  void setRemotePath(String& path);
-
   void copy(SiteFile& siteFile) {
-    name       = siteFile.name;              path = siteFile.path;
-    localSize  = siteFile.localSize;    localDate = siteFile.localDate;
-    remoteSize = siteFile.remoteSize;  remoteDate = siteFile.remoteDate;
-    status     = siteFile.status;      webPresent = siteFile.webPresent;
-    update     = siteFile.update;
+    status = siteFile.status;  check = siteFile.check;
+    name   = siteFile.name;    path  = siteFile.path;
+    size   = siteFile.size;    date  = siteFile.date;
     }
   };
-
 
 
 class SiteFiles;
@@ -79,48 +64,61 @@ typedef IterT<SiteFiles, SiteFile> FilesIter;         // Iterator Declaration
 
 
 class SiteFiles {
+
+String root;
+int    rootLng;
+
+HWND   hWnd;                // Data for posting progress messages
+uint   msgID;
+
 public:
 
 ExpandableP<SiteFile, SiteFileP, 2> data;             // List of all files in web site (local and remote)
 
-             SiteFiles() { }
-            ~SiteFiles() { }
+            SiteFiles() : rootLng(0) { }
+           ~SiteFiles() {clear();}
 
-  void       clear() {data.clear();}
+  void      clear() {root.clear(); rootLng = 0; data.clear();}
+  void      setHwnd(HWND h) {hWnd = h;}
 
-  bool       isEmpty() {return nData() == 0;}
+  bool      isEmpty() {return nData() == 0;}
 
-  bool       findNames(TCchar* pth);
-  int        nFiles() {return data.end();}
+  void      startFromWeb(TCchar* path, HWND h, uint msgId);
+  void      setRoot(TCchar* path) {root = path;   rootLng = root.length();}
+  void      fromWeb(TCchar* path);
+  void      fromPC(TCchar* path);
+  bool      addFile(TCchar* path);
 
-  void       addWebData(TCchar* path, int size, Date& date);
+  void      update(SiteFile& uf);
+  void      delRcd(SiteFile& uf);
+  void      addFile(SiteFile& uf);
 
-  void       refresh(TCchar* pth);
+  bool      load(Archive& ar);
+  bool      load(CSVLex& lex);
+  void      save(Archive& ar);
+  void      save(CSVOut& cvsOut);
 
-  SiteFile*  find(TCchar* localPath);
+  SiteFile* find(TCchar* path) {return data.bSearch(path);}
 
-  void       display();
-  void       dspUpdates();
+  void      display(TCchar* title);
 
-  bool       load(CSVLex& lex);
-  void       add(SiteFile& file) {data = file;}
-
-  void       del(SiteFile* file) {data.del(file);}
-
-  void       save(CSVOut& cvsOut);
+  int       nData() {return data.end();}                 // returns number of data items in array
+  SiteFile* datum(int i) {return 0 <= i && i < nData() ? data[i].p : 0;}
 
 private:
 
+  bool filterFile(TCchar* path);
+
   // returns either a pointer to data (or datum) at index i in array or zero
 
-  SiteFile* datum(int i) {return 0 <= i && i < nData() ? data[i].p : 0;}
 
-  int   nData()      {return data.end();}                      // returns number of data items in array
-
-  void  removeDatum(int i) {if (0 <= i && i < nData()) data.del(i);}
+  void      removeDatum(int i) {if (0 <= i && i < nData()) data.del(i);}
 
   friend typename FilesIter;
   };
 
 
+extern SiteFiles prvFiles;
+extern SiteFiles curFiles;
+extern SiteFiles updateFiles;
 

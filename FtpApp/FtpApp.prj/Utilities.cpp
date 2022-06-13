@@ -37,3 +37,6 @@ int    pos = s.findLastOf(_T('\\'));   if (pos < 0) return s;
   return s.substr(pos + 1);
   }
 
+
+void fixRootPath(String& root) {if (root[root.length() - 1] != _T('\\')) root += _T('\\');}
+

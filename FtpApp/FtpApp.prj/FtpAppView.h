@@ -5,6 +5,7 @@
 #include "CScrView.h"
 #include "NotePadRpt.h"
 
+
 class FtpAppDoc;
 
 

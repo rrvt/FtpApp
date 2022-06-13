@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
-<Product Id="*" UpgradeCode="5B663615-3D24-4BA7-B85B-AAB0CAF26500" Language="1033"
+<Product Id="*" UpgradeCode="8D8880AE-E847-4148-B89A-0A9DC3339F65" Language="1033"
          Manufacturer="Bob -- K6RWY" Name="FtpApp"
          Version="!(bind.fileVersion.FtpApp.cmp)"
          >
@@ -31,9 +31,7 @@
   <WixVariable Id="WixUIBannerBmp" Value="C:\Program Files (x86)\WixApp\banner.bmp"/>
 
   <Icon     Id="FtpAppIcon.ico" SourceFile="$(var.SolutionDir)..\FtpApp.prj\res\FtpApp.ico"/>
-  <Icon     Id="FtpAppUnloadIcon.ico"
-                                  SourceFile="$(var.SolutionDir)..\FtpApp.prj\res\FtpAppUnload.ico"/>
-  <Property Id="ARPPRODUCTICON"  Value="FtpAppUnloadIcon.ico" />
+  <Property Id="ARPPRODUCTICON"  Value="FtpAppIcon.ico" />
 
   <Feature Id="ProductFeatures" Title="Main Product" Level="1" >
     <ComponentGroupRef Id="FtpApp.ftr"/>
@@ -43,8 +41,8 @@
 
 <Fragment>
 <ComponentGroup Id="FtpApp.ftr">
-  <ComponentRef Id="Help.cmp"/>
   <ComponentRef Id="FtpApp.cmp"/>
+  <ComponentRef Id="Help.cmp"/>
 </ComponentGroup>
 <ComponentGroup Id="UninstallFtpApp.ftr">
   <ComponentRef Id="UninstallFtpApp.cmp"/>
@@ -65,23 +63,19 @@
     <Directory Id="DesktopFolder" Name="Desktop" />
   </Directory>
 
-  <Property Id="ApplicationFolderName" Value="FtpApp" />
+  <Property Id="ApplicationFolderName" Value="FtpTest" />
   <Property Id="WIXUI_INSTALLDIR"      Value="FtpApp.pff"/>
   <Property Id="WixAppFolder"          Value="WixPerMachineFolder" />
 </Fragment>
 
 <Fragment>
 
-  <Component Id="Help.cmp"  Guid="FE150A4A-8A72-4894-9B1E-A31139B80188" Directory="FtpApp.pff">
-    <File Id="Help.cmp" Source="$(var.SolutionDir)..\Release\FtpApp.chm" KeyPath="yes"/>
-  </Component>
-
-  <Component Id="FtpApp.cmp"  Guid="388E1FA5-F840-483F-929A-D4AF22C8459B" Directory="FtpApp.pff">
+  <Component Id="FtpApp.cmp"  Guid="D562BBAC-0860-4B03-AF04-ECF4D7EEEE91" Directory="FtpApp.pff">
     <File Id="FtpApp.cmp" Source="$(var.SolutionDir)..\Release\FtpApp.exe" KeyPath="yes"/>
 
     <Shortcut Id               = "FtpApp.shc"
               Name             = "FtpApp"
-              Description      = "Encrypted Ftp Application"
+              Description      = "Update Web Site with SSL Encryption"
               Advertise        = "yes"
               Directory        = "FtpApp.pmf"
               WorkingDirectory = "FtpApp.pff"
@@ -90,19 +84,26 @@
 
     <Shortcut Id               = "FtpApp.dsk"
               Name             = "FtpApp"
-              Description      = "Encrypted Ftp Application"
+              Description      = "Update Web Site with SSL Encryption"
               Advertise        = "yes"
               Directory        = "DesktopFolder"
               WorkingDirectory = "FtpApp.pff"
               Icon             = "FtpAppIcon.ico"
               />
+    <Condition>
+      <![CDATA[Installed OR VersionNT >= 601]]>
+    </Condition>
+  </Component>
+
+  <Component Id="Help.cmp"  Guid="2D9CE8E3-8D85-4616-A83E-21A84CEDDBE7" Directory="FtpApp.pff">
+    <File Id="Help.cmp" Source="$(var.SolutionDir)..\Release\FtpApp.chm" KeyPath="yes"/>
   </Component>
 
 </Fragment>
 
 <Fragment>
 
-  <Component Id="UninstallFtpApp.cmp"  Guid="B9CA3278-76D8-4CA9-BE6C-FF53311BDF23"
+  <Component Id="UninstallFtpApp.cmp"  Guid="408F9204-3622-4715-98EC-C2C17DEBC5AB"
                                                                               Directory="FtpApp.pmf">
 
     <Shortcut Id               = "UninstallFtpApp.shc"
@@ -110,7 +111,7 @@
               Description      = "Uninstalls FtpApp"
               Target           = "[System64Folder]msiexec.exe"
               Arguments        = "/x [ProductCode]"
-              Icon             = "FtpAppUnloadIcon.ico"
+              Icon             = "FtpAppIcon.ico"
               />
     <RemoveFolder Id="FtpApp.uni" Directory="FtpApp.pmf" On="uninstall"/>
     <RegistryValue Root="HKCU" Key="Software\UninstallFtpApp.cmp" Name="installed"

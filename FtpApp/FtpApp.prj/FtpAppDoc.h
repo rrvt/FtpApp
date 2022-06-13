@@ -4,19 +4,20 @@
 #pragma once
 #include "CDoc.h"
 #include "MainFrame.h"
-#include "SiteFiles.h"
+#include "SiteID.h"
+
+class SiteFile;
 
 
-enum DataSource {NotePadSrc, SiteSrc, NewSiteSrc};          // StoreSrc,
+enum DataSource {NotePadSrc, StoreSrc, PrvSiteSrc, LclSiteSrc, UpdSiteSrc};
 
 
 class FtpAppDoc : public CDoc {
 
-PathDlgDsc  pathDlgDsc;
-
 DataSource  dataSource;
 
-SiteFiles   updateFiles;
+bool        cmdLock;
+bool        savePrv;
 
 protected: // create from serialization only
 
@@ -25,20 +26,16 @@ protected: // create from serialization only
 
 public:
 
-      DataSource dataSrc() {return dataSource;}
+  virtual     ~FtpAppDoc();
 
-          bool   login();
+    DataSource dataSrc() {return dataSource;}
+          void display(DataSource ds);
 
-          void   display(DataSource ds);
+          bool loadPrevSiteData();
+          void saveSite(DataSource src);
 
-  virtual void   serialize(Archive& ar);
+  virtual void serialize(Archive& ar);
 
-// Implementation
-public:
-
-  virtual ~FtpAppDoc();
-
-  bool loadSiteData();
 
 #ifdef _DEBUG
   virtual void AssertValid() const;
@@ -47,52 +44,52 @@ public:
 
 private:
 
-  void add(SiteFile& siteFile, SiteFile::Status status);
+  String& dbPath(String& path) {return siteID.dbPath(path);}
 
-  void testLine(int n);
-  void wholePage();
-  void compareFiles();
+  void    cmpPrvFile(SiteFile& uf);
+  void    findDeleted();
+  bool    put(SiteFile& uf);
+  bool    get(SiteFile& uf);
+  bool    del(SiteFile& uf);
+  void    dspUpdates(bool onlyChkd = false);
 
-// Generated message map functions
+  void    startWkrThrd(AFX_THREADPROC thdProc, uint arg, int n);
+  bool    finWkrThrd(LPARAM lParam);
 
 protected:
 
   DECLARE_MESSAGE_MAP()
 
 public:
+
+  afx_msg void onStartThread();
+
   afx_msg void OnNewSite();
-  afx_msg void OnLoginSite();
+  afx_msg void onEditSite();
+  afx_msg void onPickSite();
+          void loadSite();
+          void finLoadSite(LPARAM lParam);    // finish Load Site
   afx_msg void OnUpdateSite();
+
   afx_msg void OnConfirmUpdate();
-  afx_msg void OnRefresh();
-  afx_msg void OnLoadSite();
-  afx_msg void OnSaveSite();
-  afx_msg void OnDeleteSite();
+          void confirmUpdate();
+          void cnfrmPrgs(LPARAM lParami);
+          void finConfirm(LPARAM lParam);
+//        void cnfrmStsErr(LPARAM lParam);
+
+  afx_msg void onGetSite();                   // start thread to do the hard work and
+          void finGetSite(LPARAM lParam);     // finish get site command
   afx_msg void OnOptions();
+  afx_msg void onDeleteSite();
   };
 
 
 
 
 
+//  void testLine(int n);
+//  void wholePage();
 
-
-
-#ifdef Examples
-  afx_msg void OnTest();
-  afx_msg void displayDataStore();
-  afx_msg void myButton();
-
-  afx_msg void OnComboBoxChng();
-
-  afx_msg void OnTBEditBox();
-  afx_msg void myButton1();
-  afx_msg void onOption1();
-  afx_msg void onOption2();
-  afx_msg void onOption3();
-  afx_msg void onOption21();
-  afx_msg void onOption22();
-  afx_msg void onOption23();
-  afx_msg void OnTestEditBoxes();
-#endif
+// Generated message map functions
+//  bool filterFile(SiteFile& sf);
 

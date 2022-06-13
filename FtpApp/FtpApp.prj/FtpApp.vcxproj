@@ -12,23 +12,24 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{4951D647-AB68-408B-B26B-8323DA562B68}</ProjectGuid>
+    <ProjectGuid>{FB2EDA15-CDF7-4399-955F-0072AFFACEFA}</ProjectGuid>
     <Keyword>MFCProj</Keyword>
-    <RootNamespace>TestApp</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <RootNamespace>FtpTest</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
@@ -60,23 +61,25 @@
       <Optimization>MaxSpeed</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>
-        $(ProjectDir);$(SolutionDir)..\..\FtpLib\FtpLib.prj\;$(SolutionDir)..\..\Library\Library.prj\;$(SolutionDir)..\..\Library\Extras\;$(SolutionDir)..\..\OpenSSL.3.1\$(Configuration)\include\;%(AdditionalIncludeDirectories)
-      </AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile/>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\FtpNew.prj\;$(SolutionDir)..\..\Library\Library.prj\;$(SolutionDir)..\..\Library\Extras\;$(SolutionDir)..\..\OpenSSL.3.1\$(Configuration)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <BasicRuntimeChecks />
+      <BasicRuntimeChecks/>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <PrecompiledHeaderOutputFile/>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>Htmlhelp.lib;libssl.lib;libcrypto.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>
-        $(SolutionDir)..\..\OpenSSL.3.1\$(Configuration)\;%(AdditionalLibraryDirectories)
-      </AdditionalLibraryDirectories>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\OpenSSL.3.1\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -96,29 +99,32 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>
-        $(ProjectDir);$(SolutionDir)..\..\FtpLib\FtpLib.prj\;$(SolutionDir)..\..\Library\Library.prj\;$(SolutionDir)..\..\Library\Extras\;$(SolutionDir)..\..\OpenSSL.3.1\$(Configuration)\include\;%(AdditionalIncludeDirectories)
-      </AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile/>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\FtpNew.prj\;$(SolutionDir)..\..\Library\Library.prj\;$(SolutionDir)..\..\Library\Extras\;$(SolutionDir)..\..\OpenSSL.3.1\$(Configuration)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
-      <ProgramDataBaseFileName />
+      <ProgramDataBaseFileName>$(OutDir)$(ProjectName).pdb</ProgramDataBaseFileName>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <BasicRuntimeChecks />
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <PrecompiledHeaderOutputFile/>
+      <BasicRuntimeChecks/>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>Htmlhelp.lib;libssl.lib;libcrypto.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>
-        $(SolutionDir)..\..\OpenSSL.3.1\$(Configuration)\;%(AdditionalLibraryDirectories)
-      </AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <ProgramDatabaseFile />
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <ProgramDatabaseFile/>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\OpenSSL.3.1\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -140,19 +146,16 @@
     <ClInclude Include="FtpApp.h" />
     <ClInclude Include="FtpAppDoc.h" />
     <ClInclude Include="FtpAppView.h" />
-    <ClInclude Include="MainFrame.h" />
-    <ClInclude Include="ProgBar.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="SiteDirs.h" />
     <ClInclude Include="SiteFiles.h" />
-    <ClInclude Include="SiteFtp.h" />
-    <ClInclude Include="Site.h" />
+    <ClInclude Include="SiteLoginDlg.h" />
+    <ClInclude Include="MainFrame.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SiteID.h" />
     <ClInclude Include="SitePickerDlg.h" />
     <ClInclude Include="SiteUpdateDlg.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Utilities.h" />
-    <ClInclude Include="WebLoginDlg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Library\Extras\AboutDlg.cpp" />
@@ -160,40 +163,35 @@
     <ClCompile Include="FtpApp.cpp" />
     <ClCompile Include="FtpAppDoc.cpp" />
     <ClCompile Include="FtpAppView.cpp" />
-    <ClCompile Include="MainFrame.cpp" />
-    <ClCompile Include="ProgBar.cpp" />
-    <ClCompile Include="SiteDirs.cpp" />
     <ClCompile Include="SiteFiles.cpp" />
-    <ClCompile Include="SiteFtp.cpp" />
-    <ClCompile Include="Site.cpp" />
+    <ClCompile Include="SiteLoginDlg.cpp" />
+    <ClCompile Include="MainFrame.cpp" />
+    <ClCompile Include="SiteID.cpp" />
     <ClCompile Include="SitePickerDlg.cpp" />
     <ClCompile Include="SiteUpdateDlg.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Utilities.cpp" />
-    <ClCompile Include="WebLoginDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FtpApp.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Library\Extras\AboutDlg.rc2" />
     <None Include="..\README.md" />
+    <None Include="..\..\Library\Extras\AboutDlg.rc2" />
     <None Include="..\..\Library\Extras\Options.rc2" />
+    <None Include="res\FtpApp.ico" />
     <None Include="res\FtpApp.rc2" />
-    <None Include="C:\Users\rrvt\AppData\Roaming\FtpApp\FtpApp.ini" />
-    <None Include="C:\Users\rrvt\AppData\Roaming\FtpApp\ftpBuffer.txt" />
-    <None Include="C:\Users\rrvt\AppData\Roaming\FtpApp\swde.csv" />
+    <None Include="res\Toolbar.bmp" />
+  <None Include="C:\Users\rrvt\AppData\Roaming\FtpApp\FtpApp.ini" />
+    <None Include="C:\Users\rrvt\AppData\Roaming\FtpApp\swde.com.csv" />
   </ItemGroup>
+  
   <ItemGroup>
-    <Image Include="res\FtpApp.ico" />
-    <Image Include="res\Toolbar15.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\FtpLib\FtpLib.prj\FtpLib.vcxproj">
-      <Project>{50000e9f-5994-4082-8fd0-69f32efd766d}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\Library\Library.prj\Library.vcxproj">
-      <Project>{83D14EA4-637F-41FF-8656-4475E7AE96CE}</Project>
+      <Project>{E663F373-7E55-4E77-B250-642C8B6A69CB}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\FtpNew.prj\FtpNew.vcxproj">
+      <Project>{5d9dcdc0-6a38-42bc-8acf-0d3a7270bb29}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

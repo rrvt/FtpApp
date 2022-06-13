@@ -2,19 +2,11 @@
 
 #pragma once
 #include "CApp.h"
-#include "IniFile.h"
-
-
-extern TCchar* GlobalSect;
-extern TCchar* LastSiteKey;
-extern TCchar* LocalWebPath;
-
-extern IniFile iniFile;
+#include "MainFrame.h"
 
 
 class FtpAppDoc;
 class FtpAppView;
-class MainFrame;
 
 
 // FtpApp:
@@ -22,7 +14,6 @@ class MainFrame;
 
 class FtpApp : public CApp {
 
-String bufPath;
 String roamPath;
 String appPath;
 
@@ -33,11 +24,10 @@ public:
   virtual BOOL InitInstance();
   virtual int  ExitInstance();
 
-          FtpAppDoc*  doc()         {return (FtpAppDoc*)  CApp::getDoc();}
-          FtpAppView* view()        {return (FtpAppView*) CApp::getView();}
-          MainFrame*  mainFrm()     {return (MainFrame*) m_pMainWnd;}
+          FtpAppDoc*  doc()  {return (FtpAppDoc*)  CApp::getDoc();}
+          FtpAppView* view() {return (FtpAppView*) CApp::getView();}
+          MainFrame*  mainFrm() {return (MainFrame*) m_pMainWnd;}
           String&     roamingPath() {return roamPath;}
-          String&     ftpBufPath()  {return bufPath;}
           String&     thisAppPath() {return appPath;}
 
   DECLARE_MESSAGE_MAP()
@@ -50,7 +40,11 @@ public:
 
 extern FtpApp theApp;
 
-inline void        invalidate() {theApp.invalidate();}
-inline FtpAppDoc*  doc()        {return theApp.doc();}
-inline FtpAppView* view()       {return theApp.view();}
+inline void        invalidate()  {theApp.invalidate();}
+inline FtpAppDoc*  doc()         {return theApp.doc();}
+inline FtpAppView* view()        {return theApp.view();}
+inline MainFrame*  mainFrm()     {return theApp.mainFrm();}
+inline ToolBar&    getToolBar()  {return mainFrm()->getToolBar();}
+inline String&     roamingPath() {return theApp.roamingPath();}
+inline String&     appPath()     {return theApp.thisAppPath();}
 

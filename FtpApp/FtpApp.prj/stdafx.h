@@ -4,8 +4,6 @@
 
 #pragma once
 
-#define DebugMemoryLeaks
-
 #ifdef DebugMemoryLeaks
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
@@ -56,12 +54,5 @@ typedef basic_string<Tchar> tstring;
 #include "Strings.h"
 #include "Variant.h"
 #include "NewAllocator.h"
-#include <afxcontrolbars.h>
-#include <afxcontrolbars.h>
 
-
-// Define Examples if examples must execute in new application
-// Also define/undefine in Resource.h
-
-//#define Examples
 

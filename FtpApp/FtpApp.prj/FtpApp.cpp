@@ -1,26 +1,23 @@
 // FtpApp.cpp : Defines the class behaviors for the application.
-//
-// This application defines only a few operations which when used properly will allow the user
-// to update a web site.  Note though, that it has only been tested on Yahoo Small Business Web Host.
+
 
 #include "stdafx.h"
 #include "FtpApp.h"
 #include "AboutDlg.h"
+#include "ExtraResource.h"
 #include "filename.h"
-#include "FtpAppDoc.h"
-#include "FtpAppView.h"
+#include "Ftp.h"
+#include "IniFile.h"
+#include "MainFrame.h"
 #include "NotePad.h"
 #include "Options.h"
-#include "Site.h"
+#include "FtpAppDoc.h"
+#include "FtpAppView.h"
 
-
-TCchar* GlobalSect   = _T("Global");
-TCchar* LastSiteKey  = _T("LastSite");
-TCchar* LocalWebPath = _T("LocalWebPath");
 
 
 FtpApp  theApp;                       // The one and only FtpApp object
-IniFile iniFile;                      // The interface to the application's initialization file
+IniFile iniFile;
 
 
 // FtpApp
@@ -41,7 +38,6 @@ BOOL FtpApp::InitInstance() {
   iniFile.setAppDataPath(m_pszHelpFilePath, *this);
 
   roamPath = getPath(iniFile.getAppDataPath(m_pszHelpFilePath));
-  bufPath  = roamPath + _T("ftpBuffer.txt");
   appPath  = getPath(m_pszHelpFilePath);
 
   notePad.clear();
@@ -74,17 +70,13 @@ BOOL FtpApp::InitInstance() {
   // Dispatch commands specified on the command line.  Will return FALSE if
   // app was launched with /RegServer, /Register, /Unregserver or /Unregister.
 
-  if (!ProcessShellCommand(cmdInfo)) return FALSE;            // Application initialization code follows
+  if (!ProcessShellCommand(cmdInfo)) return FALSE;
 
-  setAppName(_T("FTP App")); setTitle(_T("Web Site Update"));
+  setAppName(_T("Ftp Test")); setTitle(_T("Main Window"));
 
   view()->setFont(_T("Arial"), 12.0);
 
   options.load();    view()->setOrientation(options.orient);
-
-  // Loads and displays the last manipulated by this application (if any)
-
-  if (site.initSiteData()) {doc()->loadSiteData();   site.display();}
 
   m_pMainWnd->ShowWindow(SW_SHOW);   m_pMainWnd->UpdateWindow();   return TRUE;
   }
@@ -106,7 +98,11 @@ PrtrOrient orient;
 
 int FtpApp::ExitInstance() {
 
-  siteFtp.close();
+  ftp.close();
+
+#ifdef DebugMemoryLeaks
+  _CrtDumpMemoryLeaks();
+#endif
 
   return CApp::ExitInstance();
   }

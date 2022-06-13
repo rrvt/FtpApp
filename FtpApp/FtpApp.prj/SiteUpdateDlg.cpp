@@ -27,11 +27,10 @@ int       index;
 
   for (siteFile = iter(); siteFile; siteFile = iter++) {
     switch (siteFile->status) {
-      case SiteFile::Delete : s = _T(" Delete File: "); break;
-      case SiteFile::Changed: s = _T(" Update File: "); break;
-      case SiteFile::PutFile: s = _T(" Put File:    "); break;
-      case SiteFile::GetFile: s = _T(" Get File:    "); break;
-      default               : s = _T(" Unknown:     "); break;
+      case PutSts : s = _T(" Put File:    "); break;
+      case GetSts : s = _T(" Get File:    "); break;
+      case DelSts : s = _T(" Delete File: "); break;
+      default     : continue;
       }
 
     s += remotePath(siteFile->path);
@@ -63,13 +62,10 @@ int       i;
 SiteFile* file;
 
   for (i = 0; i < n; i++) {
-    Cstring cs;
-
-    listCtrl.GetText(i, cs);
 
     file = (SiteFile*) listCtrl.GetItemData(i);
 
-    if (file) file->update = listCtrl.GetCheck(i) == BST_CHECKED;
+    if (file) file->check = listCtrl.GetCheck(i) == BST_CHECKED;
     }
 
   CDialogEx::OnOK();
@@ -82,11 +78,10 @@ int       i;
 SiteFile* file;
 
   for (i = 0; i < n; i++) {
-    Cstring cs;   listCtrl.GetText(i, cs);
 
     file = (SiteFile*) listCtrl.GetItemData(i);
 
-    if (file) file->update = true;
+    if (file) file->check = true;
     }
 
   CDialogEx::OnOK();
