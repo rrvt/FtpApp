@@ -1,7 +1,8 @@
 [SolutionInfo]
+RootPath=D:\Sources\FtpApp
 Path=D:\Sources\FtpApp\FtpApp\FtpApp.sln
 Name=FtpApp
-Version=2.0
+Version=2.100000
 [DefaultPath]
 NPaths=1
 DefKey0=Icon
@@ -10,21 +11,21 @@ Icon.Path=D:\Sources\FtpApp\FtpApp.prj\res\
 NoIcons=1
 [Icon00]
 IconID=FtpApp
-WixID=FtpAppIcon.ico
+WixID=FtpApp_Icon.exe
 IconPath=D:\Sources\FtpApp\FtpApp.prj\res\FtpApp.ico
 [Product]
 ProductName=FtpApp
 Company=Bob -- K6RWY
 WixName=FtpApp
-WixVersion=1.0.0.0
-UpgradeGUID=8D8880AE-E847-4148-B89A-0A9DC3339F65
+WixVersion=1.0.4.0
+UpgradeCode=3C389FD2-65BC-486E-A612-20FDAC3276DB
 SaveVerAllowed=0
 LicenseRequired=0
 LicensePath=D:\Sources\FtpApp\FtpApp\
 IconID=FtpApp
 [PFFDirectories]
 NoDirectories=1
-[PFFDirDesc01]
+[PFFDirDesc00]
 ID=FtpApp
 WixID=FtpApp.pff
 Parent=
@@ -32,7 +33,7 @@ Name=FtpApp
 HasChildren=0
 [PMFDirectories]
 NoDirectories=1
-[PMFDirDesc01]
+[PMFDirDesc00]
 ID=FtpApp
 WixID=FtpApp.pmf
 Parent=
@@ -45,7 +46,7 @@ CurSel=FtpApp
 FeatureID=FtpApp
 ProgramID=FtpApp
 StartMenuID=FtpApp
-CurSel=FtpApp
+CurSel=Help
 NoComponents=2
 [Ftr00Cmp00]
 ID=FtpApp
@@ -61,3 +62,4 @@ IsWin7=1
 ID=Help
 Path=D:\Sources\FtpApp\Release\FtpApp.chm
 Guid=2D9CE8E3-8D85-4616-A83E-21A84CEDDBE7
+IconID=FtpApp

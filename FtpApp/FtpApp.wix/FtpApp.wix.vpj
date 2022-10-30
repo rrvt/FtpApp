@@ -2,19 +2,15 @@
 <Project
   Version="10.0"
   VendorName="SlickEdit"
-  TemplateName="Microsoft Visual Studio 2017 C++"
+  TemplateName="Microsoft Visual Studio 2017"
   WorkingDir="."
-  AssociatedFile="FtpAppHlp.vcxproj"
-  AssociatedFileType="microsoft visual studio visual c++">
+  AssociatedFile="FtpApp.wix.wixproj"
+  AssociatedFileType="microsoft visual studio">
   <Config
-    Name="Debug|Win32"
-    Type="vcproj"
-    DebugCallbackName="windbg"
+    Name="Debug|x86"
+    Type="vsproj"
     OutputFile=""
-    CompilerConfigName="Visual Studio 2017">
-    <Includes>
-      <Include Dir="%(INCLUDE)"/>
-    </Includes>
+    CompilerConfigName="">
     <Menu>
       <Target
         Name="Build Solution"
@@ -24,7 +20,7 @@
         SaveOption="SaveAll"
         RunFromDir="%rw"
         ClearProcessBuffer="1">
-        <Exec CmdLine='msbuild "%w" /t:"Build" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+        <Exec CmdLine='msbuild "%w" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
       </Target>
       <Target
         Name="Clean Solution"
@@ -63,38 +59,9 @@
         <Exec CmdLine='msbuild "%w" /t:"%sf:Clean" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
       </Target>
       <Target
-        Name="Compile"
-        MenuCaption="&amp;Compile"
-        CaptureOutputWith="ProcessBuffer"
-        SaveOption="SaveAll"
-        RunFromDir="%rw"
-        ClearProcessBuffer="1">
-        <Exec CmdLine="vstudiocompile"/>
-      </Target>
-      <Target
-        Name="Debug"
-        MenuCaption="&amp;Debug"
-        SaveOption="SaveAll"
-        RunFromDir="%rw"
-        ClearProcessBuffer="1">
-        <Exec
-          CmdLine="vcproj_visual_studio_debug"
-          Type="Slick-C"/>
-      </Target>
-      <Target
-        Name="DebugVisualStudio"
-        MenuCaption="Debug - Visual Studio"
-        CaptureOutputWith="ProcessBuffer"
-        SaveOption="SaveAll"
-        RunFromDir="%rw"
-        ClearProcessBuffer="1">
-        <Exec CmdLine='devenv "%w"'/>
-      </Target>
-      <Target
         Name="Execute"
         MenuCaption="E&amp;xecute"
         SaveOption="SaveAll"
-        CaptureOutputWith="ProcessBuffer"
         RunFromDir="%rw"
         ClearProcessBuffer="1">
         <Exec CmdLine='"%o"'/>
@@ -102,14 +69,10 @@
     </Menu>
   </Config>
   <Config
-    Name="Release|Win32"
-    Type="vcproj"
-    DebugCallbackName="windbg"
+    Name="Release|x86"
+    Type="vsproj"
     OutputFile=""
-    CompilerConfigName="Visual Studio 2017">
-    <Includes>
-      <Include Dir="%(INCLUDE)"/>
-    </Includes>
+    CompilerConfigName="">
     <Menu>
       <Target
         Name="Build Solution"
@@ -119,7 +82,7 @@
         SaveOption="SaveAll"
         RunFromDir="%rw"
         ClearProcessBuffer="1">
-        <Exec CmdLine='msbuild "%w" /t:"Build" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
+        <Exec CmdLine='msbuild "%w" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
       </Target>
       <Target
         Name="Clean Solution"
@@ -158,43 +121,13 @@
         <Exec CmdLine='msbuild "%w" /t:"%sf:Clean" /p:Configuration="%bn" /p:Platform="%bp" /nologo /v:m'/>
       </Target>
       <Target
-        Name="Compile"
-        MenuCaption="&amp;Compile"
-        CaptureOutputWith="ProcessBuffer"
-        SaveOption="SaveAll"
-        RunFromDir="%rw"
-        ClearProcessBuffer="1">
-        <Exec CmdLine="vstudiocompile"/>
-      </Target>
-      <Target
-        Name="Debug"
-        MenuCaption="&amp;Debug"
-        SaveOption="SaveAll"
-        RunFromDir="%rw"
-        ClearProcessBuffer="1">
-        <Exec
-          CmdLine="vcproj_visual_studio_debug"
-          Type="Slick-C"/>
-      </Target>
-      <Target
-        Name="DebugVisualStudio"
-        MenuCaption="Debug - Visual Studio"
-        CaptureOutputWith="ProcessBuffer"
-        SaveOption="SaveAll"
-        RunFromDir="%rw"
-        ClearProcessBuffer="1">
-        <Exec CmdLine='devenv "%w"'/>
-      </Target>
-      <Target
         Name="Execute"
         MenuCaption="E&amp;xecute"
         SaveOption="SaveAll"
-        CaptureOutputWith="ProcessBuffer"
         RunFromDir="%rw"
         ClearProcessBuffer="1">
         <Exec CmdLine='"%o"'/>
       </Target>
     </Menu>
   </Config>
-  <Files></Files>
 </Project>

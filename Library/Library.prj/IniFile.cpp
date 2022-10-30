@@ -103,11 +103,27 @@ bool IniFile::writeString(TCchar* section, TCchar* key, CString& val) {
   }
 
 
+bool IniFile::write(TCchar* section, TCchar* key, CString& val) {
+  return WritePrivateProfileString(section, key, val, iniFilePath) != 0;
+  }
+
+
 bool IniFile::writeString(TCchar* section, TCchar* key, TCchar* val) {
   return WritePrivateProfileString(section, key, val, iniFilePath) != 0;
   }
 
+
+bool IniFile::write(TCchar* section, TCchar* key, TCchar*  val) {
+  return WritePrivateProfileString(section, key, val, iniFilePath) != 0;
+  }
+
+
 bool IniFile::writeInt(TCchar* section, TCchar* key, int val) {
+  return WritePrivateProfileString(section, key, toString(val), iniFilePath) != 0;
+  }
+
+
+bool IniFile::write(TCchar* section, TCchar* key, double val) {
   return WritePrivateProfileString(section, key, toString(val), iniFilePath) != 0;
   }
 
@@ -136,7 +152,7 @@ void IniFile::deleteSection(TCchar* section) {
   }
 
 
-bool IniFile::readString( TCchar* section, TCchar* key, CString& val) {
+bool IniFile::readString( TCchar* section, TCchar* key, Cstring& val) {
 Tchar stg[1024];
 
   if (GetPrivateProfileString(section, key, val, stg, noElements(stg), iniFilePath))
@@ -154,6 +170,10 @@ Tchar stg[1024];
   }
 
 
+bool IniFile::read(TCchar* section, TCchar* key, String&  val, TCchar* dflt)
+                                                            {return readString(section, key, val, dflt);}
+
+
 bool IniFile::readString( TCchar* section, TCchar* key, String&  val, TCchar* dflt) {
 Tchar stg[1024];
 
@@ -163,7 +183,11 @@ Tchar stg[1024];
   }
 
 
-bool IniFile::readString( TCchar* section, TCchar* key, CString& val, TCchar* dflt) {
+bool IniFile::read(TCchar* section, TCchar* key, Cstring& val, TCchar* dflt)
+                                                            {return readString(section, key, val, dflt);}
+
+
+bool IniFile::readString( TCchar* section, TCchar* key, Cstring& val, TCchar* dflt) {
 Tchar stg[1024];
 
   if (GetPrivateProfileString(section, key, dflt, stg, noElements(stg), iniFilePath))
@@ -172,9 +196,21 @@ Tchar stg[1024];
   }
 
 
+#if 0
+int IniFile::read(TCchar* section, TCchar* key, int def)
+                                            {return GetPrivateProfileInt(section, key, def, iniFilePath);}
+#endif
 
 int IniFile::readInt(TCchar* section, TCchar* key, int def)
-                                      {return GetPrivateProfileInt(section, key, def, iniFilePath);}
+                                            {return GetPrivateProfileInt(section, key, def, iniFilePath);}
+
+
+bool IniFile::read(TCchar* section, TCchar* key, int& val) {
+
+  val = GetPrivateProfileInt(section, key, -1, iniFilePath);   if (val == -1) {val = 0; return false;}
+
+  return true;
+  }
 
 
 bool IniFile::readPwd(   TCchar* section, TCchar* key, String&  val) {

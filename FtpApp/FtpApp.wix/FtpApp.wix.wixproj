@@ -6,7 +6,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>170F01D1-7A32-49B3-A3FB-770898F4E414</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>FtpTest</OutputName>
+    <OutputName>FtpApp</OutputName>
     <OutputType>Package</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">

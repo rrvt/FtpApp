@@ -4,6 +4,7 @@
 #pragma once
 #include "CMainFrm.h"
 #include "ToolBar.h"
+#include "WinPos.h"
 
 
 class MainFrame : public CMainFrm {
@@ -11,6 +12,9 @@ class MainFrame : public CMainFrm {
 CMFCMenuBar   m_wndMenuBar;
 ToolBar       toolBar;
 CMFCStatusBar m_wndStatusBar;
+
+bool          isInitialized;
+WinPos        winPos;                               // Position of Window
 
 CProgressCtrl progressCtl;
 int           stepSize;
@@ -55,6 +59,9 @@ public:
   afx_msg LRESULT onGetThrdMsg( WPARAM wparam, LPARAM lParam);
   afx_msg LRESULT onPickThrdMsg(WPARAM wparam, LPARAM lParam);
   afx_msg LRESULT onConfirmMsg(WPARAM wparam, LPARAM lParam);
+
+  afx_msg void    OnMove(int x, int y);
+  afx_msg void    OnSize(UINT nType, int cx, int cy);
   };
 
 

@@ -9,7 +9,7 @@
   <SatelliteDlls />
   <NonRecipeFileRefs>
     <NonRecipeFileRef>
-      <FullPath>D:\Sources\FtpApp\FtpApp.hlp\FtpAppHlp.vcxproj</FullPath>
+      <FullPath>D:\Sources\FtpApp\FtpApp.hlp\FtpApp.hlp.vcxproj</FullPath>
     </NonRecipeFileRef>
   </NonRecipeFileRefs>
 </Project>

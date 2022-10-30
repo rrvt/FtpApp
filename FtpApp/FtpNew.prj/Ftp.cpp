@@ -23,8 +23,6 @@ Ftp::~Ftp() {WSACleanup();}
 
 
 bool Ftp::login(TCchar* userId, TCchar* password) {
-//ToAnsi uid(userId);
-//ToAnsi pwd(password);
 
   if (!sendCmd(_T("USER"), userId) || !readRsp('3')) return lastCh == _T('2');
 

@@ -17,6 +17,9 @@ BEGIN_MESSAGE_MAP(MainFrame, CFrameWndEx)
   ON_WM_CREATE()
   ON_WM_SYSCOMMAND()
 
+  ON_WM_MOVE()
+  ON_WM_SIZE()
+
   ON_MESSAGE(ID_GetThrdMsg,                  &onGetThrdMsg)
   ON_MESSAGE(ID_PickThrdMsg,                 &onPickThrdMsg)
   ON_MESSAGE(ID_ConfirmMsg,                  &onConfirmMsg)
@@ -35,7 +38,7 @@ static UINT indicators[] = {
 
 // MainFrame construction/destruction
 
-MainFrame::MainFrame() noexcept : stepSize(0) { }
+MainFrame::MainFrame() noexcept : isInitialized(false), stepSize(0) { }
 
 MainFrame::~MainFrame() { }
 
@@ -49,6 +52,7 @@ BOOL MainFrame::PreCreateWindow(CREATESTRUCT& cs) {
 
 
 int MainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
+CRect winRect;
 
   if (CFrameWndEx::OnCreate(lpCreateStruct) == -1) return -1;
 
@@ -63,12 +67,13 @@ int MainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
   if (!m_wndStatusBar.Create(this)) {TRACE0("Failed to create status bar\n"); return -1;}
   m_wndStatusBar.SetIndicators(indicators, noElements(indicators));  //sizeof(indicators)/sizeof(UINT)
 
-  DockPane(&m_wndMenuBar);
-  DockPane(&toolBar);
+  GetWindowRect(&winRect);   winPos.initialPos(this, winRect);
+
+  DockPane(&m_wndMenuBar);   DockPane(&toolBar);
 
   CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows7));
                                                                          // Affects look of toolbar, etc.
-  return 0;
+  isInitialized = true;   return 0;
   }
 
 
@@ -77,6 +82,21 @@ void MainFrame::OnSysCommand(UINT nID, LPARAM lParam) {
   if ((nID & 0xFFF0) == sysAboutID) {AboutDlg aboutDlg; aboutDlg.DoModal(); return;}
 
   CMainFrm::OnSysCommand(nID, lParam);
+  }
+
+
+void MainFrame::OnMove(int x, int y)
+           {CRect winRect;   GetWindowRect(&winRect);   winPos.set(winRect);   CFrameWndEx::OnMove(x, y);}
+
+
+void MainFrame::OnSize(UINT nType, int cx, int cy) {
+CRect winRect;
+
+  CFrameWndEx::OnSize(nType, cx, cy);
+
+  if (!isInitialized) return;
+
+  GetWindowRect(&winRect);   winPos.set(winRect);
   }
 
 
@@ -151,34 +171,11 @@ int   width;
   }
 
 
-
 // MainFrame diagnostics
 
 #ifdef _DEBUG
-void MainFrame::AssertValid() const
-{
-  CFrameWndEx::AssertValid();
-}
+void MainFrame::AssertValid() const {CFrameWndEx::AssertValid();}
 
-void MainFrame::Dump(CDumpContext& dc) const
-{
-  CFrameWndEx::Dump(dc);
-}
+void MainFrame::Dump(CDumpContext& dc) const {CFrameWndEx::Dump(dc);}
 #endif //_DEBUG
-
-
-// MainFrame message handlers
-//  case ID_StsError    : d.cnfrmStsErr(lParam);    break;
-//#include "ExtraResource.h"
-//#include "resource.h"
-#if 0
-CRect winRect;   GetWindowRect(&winRect);   toolBar.initialize(winRect);
-
-  toolBar.installBtn(     ID_Btn1, _T("Load Combo"));
-  toolBar.installMenu(    ID_Menu1, IDR_PopupMenu1, _T("Menu 1"));
-  toolBar.installMenu(    ID_Menu2, IDR_PopupMenu2, _T("Menu 2"));
-  toolBar.installComboBox(ID_CBox);
-  toolBar.installEditBox( ID_EditBox, 20);
-
-#endif
 

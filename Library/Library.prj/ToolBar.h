@@ -28,19 +28,23 @@ typedef IterT<ToolBar, TBBtnCtx> TlBrIter;
 class ToolBar : public CMFCToolBar {
 typedef CMFCToolBarButton ButtonBase;
 
-int avgWidth;                     // width and height in pixels
-int height;
-int winWidth;
-int winHeight;
+CWnd* window;
+
+int   avgWidth;                     // width and height in pixels
+int   height;
+int   winWidth;
+int   winHeight;
 
 ExpandableP<TBBtnCtx, TBBtnCtxP, 2> data;
 
 public:
 
-  ToolBar() : avgWidth(0), height(0), winWidth(0), winHeight(0) { }
-  ~ToolBar() { data.clear(); }
+  ToolBar() : window(0), avgWidth(0), height(0), winWidth(0), winHeight(0) { }
+ ~ToolBar() { data.clear(); }
 
   bool           create(CWnd* wnd, uint id, DWORD style = 0);     // Create toolbar with flyby tooltips.
+
+  void           move(CRect& rect);                               // Useful in Dialog Apps only
 
   void           initialize(CRect& winRect);
                                                                   // Add additional style bits as needed
@@ -82,6 +86,8 @@ public:
   bool           OnTtnNeedText(NMHDR* pNMHDR);                  // ToolTips -- See definition for details
 
 private:
+
+  void           OnFillBackground(CDC* pDC);
 
   TBBtnCtx&      addCtx(uint id);
   TBBtnCtx*      findCtx(uint id);
