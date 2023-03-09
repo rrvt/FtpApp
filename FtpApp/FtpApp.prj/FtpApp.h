@@ -24,15 +24,14 @@ public:
   virtual BOOL InitInstance();
   virtual int  ExitInstance();
 
-          FtpAppDoc*  doc()  {return (FtpAppDoc*)  CApp::getDoc();}
-          FtpAppView* view() {return (FtpAppView*) CApp::getView();}
-          MainFrame*  mainFrm() {return (MainFrame*) m_pMainWnd;}
-          String&     roamingPath() {return roamPath;}
-          String&     thisAppPath() {return appPath;}
+  FtpAppDoc*   doc()  {return (FtpAppDoc*)  CApp::getDoc();}
+  FtpAppView*  view() {return (FtpAppView*) CApp::getView();}
+  MainFrame*   mainFrm() {return (MainFrame*) m_pMainWnd;}
+  String&      roamingPath() {return roamPath;}
+  String&      thisAppPath() {return appPath;}
 
   DECLARE_MESSAGE_MAP()
 
-  afx_msg void OnFilePrintSetup();
   afx_msg void OnAppAbout();
   afx_msg void OnHelp();
   };

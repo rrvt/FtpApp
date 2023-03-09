@@ -1,12 +1,9 @@
-// Options Dialog Box
+// Printer Dialog Box
 
 
 #pragma once
 #include "ExtraResource.h"
-
-
-extern TCchar* PortraitKey;
-extern TCchar* LandscapeKey;
+#include "PrintMgr.h"
 
 
 // OptionsDlg dialog
@@ -17,28 +14,38 @@ class OptionsDlg : public CDialogEx {
 
 public:
 
-CString   dspScale;
+Cstring   dspScale;
+CEdit     dspSclCtrl;
+
+CComboBox printerNameCtrl;
+Cstring   printerName;
 
 CComboBox orientCtrl;
-CString   orient;
+Cstring   orient;
 
-CString   topMargin;
-CString   leftMargin;
-CString   rightMargin;
-CString   botMargin;
-CEdit     dspSclCtrl;
+Cstring   topMargin;
+Cstring   botMargin;
+Cstring   leftOdd;
+Cstring   rightOdd;
+Cstring   leftEven;
+Cstring   rightEven;
+
+Cstring   prtScale;
+
 CEdit     topCtrl;
-CEdit     leftCtrl;
-CEdit     rightCtrl;
 CEdit     botCtrl;
+CEdit     leftOddCtrl;
+CEdit     rightOddCtrl;
+CEdit     leftEvenCtrl;
+CEdit     rightEvenCtrl;
 CEdit     prtSclCtrl;
 
-CString   prtScale;
 
   OptionsDlg(CWnd* pParent = nullptr);   // standard constructor
   virtual ~OptionsDlg();
 
   virtual BOOL OnInitDialog();
+  virtual void OnOK();
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
@@ -53,13 +60,21 @@ protected:
 
 private:
 
-  void floatingOnly(CEdit& ctrl);
+  void       floatingOnly(CEdit& ctrl);
+  void       printers();
+  double     toDbl(Cstring& cs);
+  String     toStg(double v);
+  PrtrOrient toOrient(Cstring& cs);
+  TCchar*    toStg(PrtrOrient orient);
 
 public:
+  afx_msg void onSelectPrinter();
   afx_msg void OnChangeTop();
-  afx_msg void OnChangeLeft();
-  afx_msg void OnChangeRight();
   afx_msg void OnChangeBot();
+  afx_msg void OnChangeLeftOdd();
+  afx_msg void OnChangeRightOdd();
+  afx_msg void OnChangeLeftEven();
+  afx_msg void OnChangeRightEven();
 
   afx_msg void OnChngDspScl();
   afx_msg void OnChngPrtScl();

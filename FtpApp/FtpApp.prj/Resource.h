@@ -34,6 +34,8 @@
 #define ID_GetSite                      407
 #define ID_DeleteSite                   409
 #define ID_StartThread                  410
+#define ID_App_About                    411
+#define ID_Options                      412
 
 // PostMessage Codes
 #define ID_GetThrdMsg                   (WM_USER + 1)

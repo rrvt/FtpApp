@@ -11,31 +11,26 @@ class Note;
 class NotePadRpt : public ReportBase {
 
 public:
+               NotePadRpt(NotePad& notePad) : ReportBase(notePad) { }
+              ~NotePadRpt() { }
 
-  NotePadRpt(NotePad& notePad) : ReportBase(notePad) { }
- ~NotePadRpt() { }
+  virtual void onBeginPrinting(CScrView& vw);
 
-//  void display(CScrView& vw);
-  virtual void print(CScrView& vw);
+  virtual void dspHeader(DevBase& dev, int pageNo = 1) { }
+  virtual void dspFooter(DevBase& dev, int pageNo = 1) { }
 
-//  void detWraps(  CScrView& vw);                  // Wrap each entity in the report body
-
-//  void detNoPages(CScrView& vw);                  // Performs a dummy printer output to determine the
-                                                    // number of pages that will be produced
-  virtual void footer(Device& dev, int pageNo);     // Output page Footer to NotePad
+  virtual void prtHeader(DevBase& dev, int pageNo);
+  virtual void prtFooter(DevBase& dev, int pageNo);
 
 protected:
 
-  virtual void create(CScrView& vw);
-
-  virtual void saveTab(Note& note);
-  virtual void restoreTabs();
-
-  virtual int  header(NotePad& np, bool printing);
+  virtual void getData(CScrView& vw);
 
 private:
 
   NotePadRpt() : ReportBase(*(NotePad*)0) { }
   };
+
+
 
 

@@ -1,10 +1,8 @@
 // Definition of an Attribute and an XmlElement, both based on XmlBase
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "XmlElement.h"
-
-#include "MessageBox.h"   // Debugging
 
 
 void XmlElement::addContent(String& frag, String& tg, TagType tagTyp) {

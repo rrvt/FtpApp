@@ -204,6 +204,12 @@ The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
 
+### Update 3/8/23
+
+Added numbers to notepad archive output.
+
+Fixed (hopefully) Print and Print Preview.  See MakeApp for details.
+
 ### Update 12/18/21
 
 While creating a template for a dialog box only application with a toolbar the Library was added to and

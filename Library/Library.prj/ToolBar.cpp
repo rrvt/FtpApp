@@ -1,7 +1,7 @@
 // Tool Bar to be used with Button and ComboBox
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "ToolBar.h"
 #include "TBButton.h"
 #include "TBComboBox.h"
@@ -10,8 +10,6 @@
 #ifdef DsplyHistory
 #include "History.h"                      // Debug Only
 #endif
-
-#include "MessageBox.h"
 
 
 static const DWORD TBStyle = WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_TOOLTIPS | CBRS_FLYBY |
@@ -290,13 +288,4 @@ CRect  rect;                                          // button rectangle relati
 
   return false;
   }
-
-
-
-#if 0
-  linRect       = rect;
-  linRect.top   = linRect.bottom = linRect.top + 24;
-  linRect.left  = winRect.left  + 24;
-  linRect.right = winRect.right - 24;
-#endif
 

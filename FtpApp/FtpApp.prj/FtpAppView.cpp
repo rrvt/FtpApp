@@ -5,7 +5,8 @@
 #include "FtpAppView.h"
 #include "FtpApp.h"
 #include "FtpAppDoc.h"
-#include "Options.h"
+#include "OptionsDlg.h"
+#include "Resource.h"
 #include "Resources.h"
 
 
@@ -14,6 +15,7 @@
 IMPLEMENT_DYNCREATE(FtpAppView, CScrView)
 
 BEGIN_MESSAGE_MAP(FtpAppView, CScrView)
+  ON_COMMAND(ID_Options, &onOptions)
 END_MESSAGE_MAP()
 
 
@@ -30,57 +32,32 @@ BOOL FtpAppView::PreCreateWindow(CREATESTRUCT& cs) {
   }
 
 
-void FtpAppView::OnPrepareDC(CDC* pDC, CPrintInfo* pInfo) {
-uint   x;
-double topMgn   = options.topMargin.stod(x);
-double leftMgn  = options.leftMargin.stod(x);
-double rightMgn = options.rightMargin.stod(x);
-double botMgn   = options.botMargin.stod(x);
+void FtpAppView::onOptions() {
+OptionsDlg dlg;
 
-  setMgns(leftMgn,  topMgn,  rightMgn, botMgn, pDC);   CScrView::OnPrepareDC(pDC, pInfo);
+  if (printer.name.isEmpty()) printer.load(0);
+
+  if (dlg.DoModal() == IDOK) pMgr.setFontScale(printer.scale);
   }
 
 
 // Perpare output (i.e. report) then start the output with the call to SCrView
 
-void FtpAppView::onPrepareOutput(bool printing) {
-DataSource ds = doc()->dataSrc();
-
-  if (printing)
-    switch(ds) {
-      case NotePadSrc : prtNote.print(*this);  break;
-      }
-
-  else
-    switch(ds) {
-      case NotePadSrc : dspNote.display(*this);  break;
-      }
+void FtpAppView::onBeginPrinting() {prtNote.onBeginPrinting(*this);}
 
 
-  CScrView::onPrepareOutput(printing);
-  }
-
-
-void FtpAppView::OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo) {
-
-  switch(doc()->dataSrc()) {
-    case NotePadSrc : setOrientation(options.orient); break;    // Setup separate Orientation?
-    case StoreSrc   : setOrientation(options.orient); break;
-    }
-  setPrntrOrient(theApp.getDevMode(), pDC);   CScrView::OnBeginPrinting(pDC, pInfo);
-  }
+void FtpAppView::onDisplayOutput() {dspNote.display(*this);}
 
 
 // The footer is injected into the printed output, so the output goes directly to the device.
 // The output streaming functions are very similar to NotePad's streaming functions so it should not
 // be a great hardship to construct a footer.
 
-void FtpAppView::printFooter(Device& dev, int pageNo) {
+void FtpAppView::printFooter(DevBase& dev, int pageNo) {
   switch(doc()->dataSrc()) {
-    case NotePadSrc : prtNote.footer(dev, pageNo);  break;
+    case NotePadSrc : prtNote.prtFooter(dev, pageNo);  break;
     }
   }
-
 
 
 void FtpAppView::OnEndPrinting(CDC* pDC, CPrintInfo* pInfo) {

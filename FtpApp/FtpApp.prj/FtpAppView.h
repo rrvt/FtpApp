@@ -22,18 +22,17 @@ protected: // create from serialization only
 
 public:
 
-  virtual ~FtpAppView() { }
+  virtual     ~FtpAppView() { }
 
   virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
-  virtual void OnPrepareDC(CDC* pDC, CPrintInfo* pInfo = NULL);
-  virtual void onPrepareOutput(bool printing);
+  virtual void onBeginPrinting();
+  virtual void onDisplayOutput();
 
-  virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
-  virtual void printFooter(Device& dev, int pageNo);
+  virtual void printFooter(DevBase& dev, int pageNo);
   virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
 
-  FtpAppDoc* GetDocument() const;
+  FtpAppDoc*   GetDocument() const;
 
 public:
 
@@ -46,12 +45,12 @@ public:
 
   DECLARE_MESSAGE_MAP()
 
+  afx_msg void onOptions();
   afx_msg void OnSetFocus(CWnd* pOldWnd);
   };
 
 
 #ifndef _DEBUG  // debug version in FtpAppView.cpp
-inline FtpAppDoc* FtpAppView::GetDocument() const
-   { return reinterpret_cast<FtpAppDoc*>(m_pDocument); }
+inline FtpAppDoc* FtpAppView::GetDocument() const {return reinterpret_cast<FtpAppDoc*>(m_pDocument);}
 #endif
 

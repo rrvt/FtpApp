@@ -79,7 +79,6 @@ public:
 
   afx_msg void onGetSite();                   // start thread to do the hard work and
           void finGetSite(LPARAM lParam);     // finish get site command
-  afx_msg void OnOptions();
   afx_msg void onDeleteSite();
   };
 

@@ -2,7 +2,7 @@
 // Copyright Software Design & Engineering, Robert R. Van Tuyl, 2013.  All rights reserved.
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "EditBox.h"
 
 
@@ -62,5 +62,4 @@ int pos = home ? 0 : -1;
     }
   }
 
-//  void setHome()  {if (created) {SetFocus(); SetSel(0,  0); SetSel(-1);}}
 

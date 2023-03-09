@@ -11,7 +11,6 @@
 #include "GetPathDlg.h"
 #include "MessageBox.h"
 #include "NotePad.h"
-#include "Options.h"
 #include "Resource.h"
 #include "SiteFiles.h"
 #include "SiteUpdateDlg.h"
@@ -37,7 +36,6 @@ BEGIN_MESSAGE_MAP(FtpAppDoc, CDoc)
   ON_COMMAND(ID_UpdateSite,     &OnUpdateSite)
   ON_COMMAND(ID_GetSite,        &onGetSite)
   ON_COMMAND(ID_ConfirmUpdate,  &OnConfirmUpdate)
-  ON_COMMAND(ID_Options,        &OnOptions)
   ON_COMMAND(ID_DeleteSite,     &onDeleteSite)
 END_MESSAGE_MAP()
 
@@ -399,14 +397,6 @@ String path;
   if (!siteID.delCurSite()) return;
 
   if (!dbPath(path).isEmpty()) DeleteFile(path);
-  }
-
-
-void FtpAppDoc::OnOptions() {
-
-  if (cmdLock) return;
-
-  options(view());  view()->setOrientation(options.orient);
   }
 
 

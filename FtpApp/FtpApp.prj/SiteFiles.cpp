@@ -5,6 +5,7 @@
 #include "Archive.h"
 #include "CSVLex.h"
 #include "CSVOut.h"
+#include "Expandable.h"
 #include "FileName.h"
 #include "FileSrch.h"
 #include "Ftp.h"

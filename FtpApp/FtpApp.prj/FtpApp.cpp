@@ -10,10 +10,8 @@
 #include "IniFile.h"
 #include "MainFrame.h"
 #include "NotePad.h"
-#include "Options.h"
 #include "FtpAppDoc.h"
 #include "FtpAppView.h"
-
 
 
 FtpApp  theApp;                       // The one and only FtpApp object
@@ -76,23 +74,7 @@ BOOL FtpApp::InitInstance() {
 
   view()->setFont(_T("Arial"), 12.0);
 
-  options.load();    view()->setOrientation(options.orient);
-
   m_pMainWnd->ShowWindow(SW_SHOW);   m_pMainWnd->UpdateWindow();   return TRUE;
-  }
-
-
-
-void FtpApp::OnFilePrintSetup() {
-PrtrOrient orient;
-
-  view()->setPrntrOrient(getDevMode());
-
-    CWinApp::OnFilePrintSetup();
-
-  orient = view()->getPrntrOrient(getDevMode());
-
-  options.setOrient(orient);   view()->setOrientation(options.orient);
   }
 
 

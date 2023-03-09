@@ -6,13 +6,12 @@
 #include "PrintMgr.h"
 
 
-extern const int     BigNmbr;
-extern const TCchar* FontSection;
-extern const TCchar* DspScaleKey;
-extern const TCchar* PrtScaleKey;
+extern const int BigNmbr;
 
 
 class CScrView : public CScrollView {
+
+DECLARE_MESSAGE_MAP()
 
 static int lastPos;
 
@@ -26,57 +25,88 @@ public:
   CScrView() : dMgr(*this), pMgr(*this) { }
  ~CScrView() { }
 
-  virtual void     OnInitialUpdate();
+  virtual void       OnInitialUpdate();
 
-          void     setFont(TCchar* f, double points = 12.0);
-          void     setMgns(double left, double top, double right, double bot, CDC* dc);
-          double   getFontScale(bool printing);
-          void     setFontScale(bool printing, double scl);
+  virtual void       OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint);    // Override
 
-  virtual void     OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint);    // Override
+  virtual void       onDisplayOutput() { }
+  virtual void       OnDraw(CDC* pDC) {dMgr.onDraw(pDC);}
 
-  virtual void     OnPrepareDC(CDC* dc, CPrintInfo* info = NULL);             // Override
+  virtual void       displayHeader(DevBase& dev) { }
+  virtual void       displayFooter(DevBase& dev) { }
 
-  virtual void     onPrepareOutput(bool printing = false);
+          void       enableDplWrap()  {dMgr.wrapEnabled = true;}
+          void       disableDplWrap() {dMgr.wrapEnabled = false;}
 
-  virtual void     OnDraw(CDC* pDC) {dMgr.OnDraw(pDC);}
-                                                                            // Override to draw this view
-          void     invalidate() {Invalidate();}
+          void       invalidate() {Invalidate();}
 
-          void       setOrientation(PrtrOrient orientation) {pMgr.setOrientation(orientation);}
-          bool       setPrntrOrient(HANDLE h, CDC* dc = 0) {return pMgr.setOrient(h, dc);}
-          PrtrOrient getPrntrOrient(HANDLE h)              {return pMgr.getOrient(h);}
-          int        noLinesPrPg() {return pMgr.noLinesPrPg();}   // Determine no lines per printed page
+          void       setFont(TCchar* f, double points) {dMgr.setFont(f, points); pMgr.setFont(f, points);}
 
-          void     suppressOutput(bool printing);
-          void     negateSuppress(bool printing);
-          void     disableWrap(bool printing);
-          void     enableWrap(bool printing);
-          Device&  getDev(bool printing);
+          double     getFontScale(bool printing)
+                                            {return printing ? pMgr.getFontScale() : dMgr.getFontScale();}
+          void       setFontScale(bool printing, double scl)
+                                    {if (printing) pMgr.setFontScale(scl);   else dMgr.setFontScale(scl);}
+
+          DevBase&   getDplDevDC(CDC*& dc);
+          DevBase&   getPrtDevDC(CDC*& dc);
+
+protected:
+
+/* Doc/View Framework Calls to implement printing
+     CMyView::OnPreparePrinting    o Set length of doc if known
+             |                     o Call DoPreparePrining to display Print dialog box which creates DC
+             V
+     CMyView::OnBeginPrinting      o Set length of document based on DC
+             |                     o Allocate DGI resources
+             V
+         CDC::StartDoc
+             |
+             V
+  |->CMyView::OnPrepareDC          o Change DC attributes
+  |          |                     o Check for end of document
+  |          V
+  |      CDC::StartPage
+  |          |
+  |          V
+  |  CMyView::OnPrint              o Print specified page, including Headers and Footers
+  |          |
+  |          V
+  -------CDC::EndPage
+             |
+             V
+         CDC::EndDoc
+             |
+             V
+     CMyView::OnEndPrinting        o Deallocate GDI resources
+*/
+
+  virtual BOOL OnPreparePrinting(CPrintInfo* info);                                 // print dialog box
+  virtual void OnBeginPrinting(CDC* dc, CPrintInfo* info) {pMgr.onBeginPrinting(dc, info);}
+  virtual void OnPrepareDC(    CDC* dc, CPrintInfo* info = 0);                // Display/Printer Override
+  virtual void OnPrint(        CDC* dc, CPrintInfo* info) {pMgr.onPrint(dc, info);}
+  virtual void OnEndPrinting(  CDC* dc, CPrintInfo* info) {pMgr.onEndPrinting(dc, info);}
+
+public:
+          void disablePrtWrap()     {pMgr.wrapEnabled = false;}
+          void enablePrtWrap()      {pMgr.wrapEnabled = true;}
+
+  virtual void onBeginPrinting() { }               // View link to Begin Printing
 
   // Printer Overrides
 
-  virtual void     trialRun(int& maxLines, int& noPages) {pMgr.trialRun(maxLines, noPages);}
-  virtual void     printFooter(Device& dev, int pageNo) {pMgr.printFooter(dev, pageNo);}
+  virtual int  getNoPages() {return pMgr.getNoPages();}
+  virtual void printHeader(DevBase& dev, int pageNo) { }
+  virtual void printFooter(DevBase& dev, int pageNo) { }
 
 protected:
-
-  virtual void     OnPrint(CDC* dc, CPrintInfo* info) {pMgr.OnPrint(dc, info);}       // Override
-
-  virtual BOOL     OnPreparePrinting(CPrintInfo* info) {return pMgr.OnPreparePrinting(info);} // Override
-          bool     finPreparePrinting(bool rslt)       {return pMgr.finPreparePrinting(rslt);}
-
-  virtual void     OnEndPrinting(CDC* dc, CPrintInfo* info)                           // Override
-                                                  {CScrollView::OnEndPrinting(dc, info); pMgr.endPrint();}
-
+          void startDev(bool printing) {if (printing) pMgr.startDev(); else dMgr.startDev();}
 private:
 
-  virtual BOOL     OnScroll(UINT nScrollCode, UINT nPos, BOOL bDoScroll = TRUE);    // Override
+  virtual BOOL OnScroll(UINT nScrollCode, UINT nPos, BOOL bDoScroll = TRUE);    // Override
 
-protected:
-
-  DECLARE_MESSAGE_MAP()
+  afx_msg void onSetupPrinter();
   };
+
 
 
 
