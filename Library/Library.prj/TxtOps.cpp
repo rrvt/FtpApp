@@ -36,16 +36,6 @@ void TxtOps::clear() {
   }
 
 
-void TxtOps::setPosition(String& sum) {
-int  wth  = dvx.width(sum);
-bool rTab = devTabs.cur->right;
-
-  if (center) {horz.centerText(wth);                       center = false;}
-  if (right)  {horz.rightText(wth);                        right  = false;}
-  if (rTab)   {horz.rightTabText(devTabs.cur->pos, wth);   devTabs.reset();}
-  }
-
-
 void TxtOps::start(bool wrapEnabled) {wrap.set(wrapEnabled, horz.remaining(), horz.maxExtent());}
 
 
@@ -77,6 +67,16 @@ int    excess   = int(fldWidth - w);
   fragmentOut(s);
 
   if (nWidth < 0 && excess > 0) horz.move(excess);
+  }
+
+
+void TxtOps::setPosition(String& sum) {
+int  wth  = dvx.width(sum);
+bool rTab = devTabs.cur->right;
+
+  if (center) {horz.centerText(wth);                       center = false;}
+  if (right)  {horz.rightText(wth);                        right  = false;}
+  if (rTab)   {horz.rightTabText(devTabs.cur->pos, wth);   devTabs.reset();}
   }
 
 

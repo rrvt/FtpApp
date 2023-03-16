@@ -64,8 +64,6 @@ private:
   void       printers();
   double     toDbl(Cstring& cs);
   String     toStg(double v);
-  PrtrOrient toOrient(Cstring& cs);
-  TCchar*    toStg(PrtrOrient orient);
 
 public:
   afx_msg void onSelectPrinter();

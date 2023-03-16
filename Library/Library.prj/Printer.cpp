@@ -7,6 +7,9 @@
 #include "winspool.h"
 
 
+       TCchar* PortraitKey    = _T("Portrait");
+       TCchar* LandscapeKey   = _T("Landscape");
+
 static TCchar* GlobalSection  = _T("Global");
 static TCchar* CurPrinterKey  = _T("CurrentPrinter");
 static TCchar* OrientationKey = _T("Orientation");
@@ -46,7 +49,7 @@ uint   x;
       }
     }
 
-  orient    = (PrtrOrient) iniFile.readInt(name, OrientationKey, PortOrient);
+//  orient    = (PrtrOrient) iniFile.readInt(name, OrientationKey, PortOrient);
   paperSize = (PaperSize)  iniFile.readInt(name, PaperSizeKey,   LetterPprSz);
   pagePlex  = (PagePlex)   iniFile.readInt(name, PagePlexKey,    SimPlex);
   iniFile.read(name, CopiesKey,      copies,        1);
@@ -66,7 +69,7 @@ String s;
 
   if (name.isEmpty()) return;
 
-  iniFile.write(name, OrientationKey, orient);
+//  iniFile.write(name, OrientationKey, orient);
   iniFile.write(name, PaperSizeKey,   paperSize);
   iniFile.write(name, PagePlexKey,    pagePlex);
   iniFile.write(name, CopiesKey,      copies);
@@ -82,4 +85,13 @@ String s;
 
   iniFile.write(GlobalSection, CurPrinterKey, name);
   }
+
+
+
+
+PrtrOrient Printer::toOrient(Cstring& cs)
+                                {String s = cs;   return s == LandscapeKey ? LandOrient : PortOrient;}
+
+
+TCchar* Printer::toStg(PrtrOrient orient) {return orient == PortOrient ? PortraitKey : LandscapeKey;}
 

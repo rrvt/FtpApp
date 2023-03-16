@@ -57,9 +57,7 @@ PrintMgr::PrintMgr(CScrView& view) : ShowMgr(view, npd, pageOut), pageOut(npd), 
 
 void PrintMgr::onBeginPrinting(CDC* cdc, CPrintInfo* pInfo) {
 
-  clear();   dc = cdc;   info = pInfo;
-
-  info->m_bContinuePrinting = true;     endPrinting = false;
+  clear();   dc = cdc;   info = pInfo;   info->m_bContinuePrinting = true;
 
   info->m_nNumPreviewPages = 1;
 
@@ -85,7 +83,7 @@ uint     i;
 
 
 void PrintMgr::clear() {
-  npd.clear();   pageOut.clear();   dc = 0;   info = 0;   endPrinting = false;
+  npd.clear();   pageOut.clear();   endPrinting = false;
   leftFooter.clear();   date.clear();   pageNo = 0;
   }
 
@@ -107,8 +105,6 @@ DEVMODE devMode;
   }
 
 
-
-
 void PrintMgr::setHorzMgns() {
 double leftMgn;
 double rightMgn;
@@ -122,14 +118,13 @@ double rightMgn;
   }
 
 
-
 // Find the next preview page by suppressing the output of preceding pages.
 // The OnPrint function is used to output to the preview window.
 
 void PrintMgr::findNextPreviewPage(CDC* dc, CPrintInfo* info) {
 uint i;
 
-  pageOut.clearOps();   pageOut.suppressOutput();   pageOut.startDev();
+  endPrinting = false;   pageOut.clearOps();   pageOut.suppressOutput();   pageOut.startDev();
 
   for (i = 1; i < info->m_nCurPage; i++) onePageOut();
 
@@ -141,7 +136,9 @@ uint i;
 
 void PrintMgr::onPrint(CDC* cdc, CPrintInfo* pInfo) {
 
-  onePageOut();   if (isFinishedPrinting(info)) endPrinting = true;
+  onePageOut();
+
+  endPrinting = isFinishedPrinting(info);
   }
 
 
@@ -169,41 +166,4 @@ bool fin = pageOut.isEndDoc();
 
   return fin;
   }
-
-
-#if 0
-void PrintMgr::checkData(TCchar* tc, CDC* cdc, CPrintInfo* pInfo) {
-String s;
-
-  if (cdc != dc) {
-    s = tc;   s += _T(":  ");   s += _T("new dc");   messageBox(s);
-    }
-  if (pInfo != info) {
-    s = tc;   s += _T(":  ");   s +=   _T("new info");   messageBox(s);
-    }
-  }
-
-
-void PrintMgr::examineCurFont(TCchar* tc) {DevBase& dev = pageOut.getDev();    dev.examineCurFont(tc);}
-#endif
-
-
-#if 0
-void PrintMgr::init(CDC* dc, CPrintInfo* info) {
-
-  memset(&devMode, 0, sizeof(devMode));   dc->ResetDC(&devMode); // sets the Addtribut devmode parameter
-
-  info->m_bContinuePrinting = true;     endPrinting = false;
-
-  info->m_nNumPreviewPages = 1;
-
-  info->SetMinPage(1);   info->SetMaxPage(9999);
-
-  pageOut.clear();
-
-  pageOut.prepare(font, fontSize, dc, info);
-
-  pageOut.setVertMgns(printer.topMargin, printer.botMargin);
-  }
-#endif
 

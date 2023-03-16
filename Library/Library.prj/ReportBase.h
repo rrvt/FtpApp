@@ -3,6 +3,7 @@
 
 #pragma once
 #include "Date.h"
+#include "Printer.h"
 
 class CScrView;
 class DevBase;
@@ -22,7 +23,10 @@ Date     dateModified;
 bool     printing;
 
 public:
-               ReportBase(NotePad& notePad) : np(notePad), maxPages(0), printing(false) { }
+PrtrOrient prtrOrietn;
+
+               ReportBase(NotePad& notePad) : np(notePad), maxPages(0),
+                                                             printing(false), prtrOrietn(PortOrient) { }
               ~ReportBase() { }
 
           void setTitle(TCchar* t) {title = t;}

@@ -61,7 +61,6 @@ public:
   void       onBeginPrinting(CDC* cdc, CPrintInfo* pInfo);
   void       onPrepareDC(    CDC* cdc, CPrintInfo* pInfo);
   void       onPrint(        CDC* cdC, CPrintInfo* pInfo);
-  void       onEndPrinting(  CDC* cdc, CPrintInfo* pInfo) {clear();}
 
   // Utilities
   void       startDev() {if (!endPrinting) pageOut.startDev();}
@@ -76,9 +75,6 @@ private:
   void       findNextPreviewPage(CDC* dc, CPrintInfo* info);
   void       onePageOut();
   bool       isFinishedPrinting(CPrintInfo* info);
-
-//void       checkData(TCchar* tc, CDC* cdc, CPrintInfo* pInfo);
-//void       examineCurFont(TCchar* tc);
 
   PrintMgr() : ShowMgr(*(CScrView*)0, *(NotePad*)0, *(NtPdToPrtr*)0), pageOut(*(NotePad*)0) { }
   };

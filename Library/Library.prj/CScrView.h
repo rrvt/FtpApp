@@ -3,9 +3,11 @@
 
 #pragma once
 #include "DsplyMgr.h"
+#include "NotePadRpt.h"
 #include "PrintMgr.h"
 
 
+extern TCchar*   RptOrietnSect;
 extern const int BigNmbr;
 
 
@@ -20,14 +22,22 @@ protected:
 DsplyMgr   dMgr;
 PrintMgr   pMgr;
 
+NotePadRpt dspNote;
+NotePadRpt prtNote;
+
 public:
 
-  CScrView() : dMgr(*this), pMgr(*this) { }
+  CScrView() : dMgr(*this), pMgr(*this), dspNote(dMgr.getNotePad()), prtNote(pMgr.getNotePad()) { }
  ~CScrView() { }
 
   virtual void       OnInitialUpdate();
 
   virtual void       OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint);    // Override
+
+          void       initNoteOrietn();
+          void       saveNoteOrietn();
+  virtual void       initRptOrietn() { }
+  virtual void       saveRptOrietn() { }
 
   virtual void       onDisplayOutput() { }
   virtual void       OnDraw(CDC* pDC) {dMgr.onDraw(pDC);}
@@ -84,7 +94,7 @@ protected:
   virtual void OnBeginPrinting(CDC* dc, CPrintInfo* info) {pMgr.onBeginPrinting(dc, info);}
   virtual void OnPrepareDC(    CDC* dc, CPrintInfo* info = 0);                // Display/Printer Override
   virtual void OnPrint(        CDC* dc, CPrintInfo* info) {pMgr.onPrint(dc, info);}
-  virtual void OnEndPrinting(  CDC* dc, CPrintInfo* info) {pMgr.onEndPrinting(dc, info);}
+  virtual void OnEndPrinting(  CDC* dc, CPrintInfo* info) { }   //
 
 public:
           void disablePrtWrap()     {pMgr.wrapEnabled = false;}

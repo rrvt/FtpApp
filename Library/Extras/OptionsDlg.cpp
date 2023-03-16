@@ -8,9 +8,6 @@
 #include <Winspool.h>
 
 
-static TCchar* PortraitKey  = _T("Portrait");
-static TCchar* LandscapeKey = _T("Landscape");
-
 static const ulong EnumFlags = PRINTER_ENUM_LOCAL | PRINTER_ENUM_CONNECTIONS;
 static const ulong DscType   = 4;
 
@@ -47,7 +44,6 @@ BOOL OptionsDlg::OnInitDialog() {
   dspScale    = toStg(display.scale);
 
   printerName = printer.name;
-  orient      = toStg(printer.orient);
   topMargin   = printer.topMargin;
   botMargin   = printer.botMargin;
   leftOdd     = printer.leftOdd;
@@ -108,7 +104,7 @@ String  s;
   if (!printerName.isEmpty() && printerName != newPrntr) printer.store();
 
   printer.load(newPrntr);
-  orient      = toStg(printer.orient);
+  orient      = printer.toStg(printer.orient);
   orientCtrl.SelectString(-1, orient);
   topMargin   = printer.topMargin;              topCtrl.SetWindowText(topMargin);
   botMargin   = printer.botMargin;              botCtrl.SetWindowText(botMargin);
@@ -195,7 +191,7 @@ void OptionsDlg::OnOK() {
   display.scale     = toDbl(dspScale);    display.store();
 
   printer.name      = printerName;
-  printer.orient    = toOrient(orient);
+  printer.orient    = printer.toOrient(orient);
   printer.topMargin = toDbl(topMargin);
   printer.botMargin = toDbl(botMargin);
   printer.leftOdd   = toDbl(leftOdd);
@@ -216,16 +212,5 @@ double v = s.stod(x);
 
 
 String OptionsDlg::toStg(double v) {String s = v;   return s;}
-
-
-PrtrOrient OptionsDlg::toOrient(Cstring& cs)
-                                {String s = cs;   return s == LandscapeKey ? LandOrient : PortOrient;}
-
-
-TCchar* OptionsDlg::toStg(PrtrOrient orient) {
-  return printer.orient == PortOrient ? PortraitKey : LandscapeKey;
-  }
-
-
 
 

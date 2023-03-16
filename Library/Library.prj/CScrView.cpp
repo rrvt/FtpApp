@@ -5,7 +5,12 @@
 #include "CScrView.h"
 #include "CApp.h"
 #include "Display.h"
+#include "IniFile.h"
 #include "Printer.h"
+
+
+       TCchar* RptOrietnSect = _T("ReportOrientn");
+static TCchar* NoteOrietnKey = _T("NotePad");
 
 
 int CScrView::lastPos = 0;
@@ -23,8 +28,18 @@ void CScrView::OnInitialUpdate() {
   CScrollView::OnInitialUpdate();
 
   display.load();  dMgr.setFontScale(display.scale);
-  printer.load(0); pMgr.setFontScale(printer.scale);    //pMgr.orient = printer.orient;
+  printer.load(0); pMgr.setFontScale(printer.scale);
+
+  initNoteOrietn();   initRptOrietn();
   }
+
+
+void CScrView::initNoteOrietn()
+            {prtNote.prtrOrietn = (PrtrOrient) iniFile.readInt(RptOrietnSect, NoteOrietnKey, PortOrient);}
+
+
+void CScrView::saveNoteOrietn() {iniFile.write(RptOrietnSect, NoteOrietnKey, prtNote.prtrOrietn);}
+
 
 
 void CScrView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)

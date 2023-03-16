@@ -35,14 +35,15 @@ AfterTxt  afterTxt;                           // Operation to perform after text
 double    afterVal;                           // The value to be used by the ater operation
 String    fontFace;                           // Font Face when afterTxt chooses this option
 
-bool      center;                             // center string horizonally in window when true;
-bool      right;                              // right align in window when true;
+bool&     center;                             // center string horizonally in window when true;
+bool&     right;                              // right align in window when true;
 
 double    pos;                                // position each line uses during wrap operation
 Wrap      wrap;
 
   TxtOps() : txtOut(*(TxtOut*)0), dvx(*(DevCtx*)0), horz(*(Horiz*)0),
-             devTabs(*(DevTabs*)0), vert(*(VertMgmt*)0), wrap(dvx) { }
+             devTabs(*(DevTabs*)0), vert(*(VertMgmt*)0),
+             center(*(bool*)0), right(*(bool*)0), wrap(dvx) { }
 
   TxtOps(TxtOut& to, AfterTxt aftr, double aftrVal, TCchar* face);
 

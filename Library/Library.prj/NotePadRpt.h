@@ -11,6 +11,7 @@ class Note;
 class NotePadRpt : public ReportBase {
 
 public:
+
                NotePadRpt(NotePad& notePad) : ReportBase(notePad) { }
               ~NotePadRpt() { }
 

@@ -51,51 +51,6 @@ file for which an action is suggested (or selecting the "Check All" button).
 In any event this application works more like Dreamweaver in that it alerts the user to files that
 need updating on the web site and facilitating the update.
 
-## Updates
-
-### Update 10/28/22
-
-Start app in the same position and size as when it exited the last time.  Update the background of the
-toolbar.
-
-### Update 6/12/22
-
-Complete rewrite of the FtpLib obtained off the web.  One issue was the lack of a user molification
-output during long running sequences.  So the long running sequences were put into a "Worker Thread"
-and the function then sent an update to a "Progress Bar" in the UI Thread (the main Thread).  In one
-case the file that was transferred is also displayed in the main window just after the transfer takes
-place (with the usual caviot that Windows messages don't happen instantly).
-
-### Update 01/31/22
-
-Updates to the library, mostly about the toolbar, but also NewAllocator, and a minor addition to
-Expandable.
-
-Also scrubbed the project files to remove all references to precompiled header files which I turned off
-in VS17.  Unfortnately VS does not remove all references and pch files kept cropping up.  Not only does
-that slow down the compiler but the files are large...
-
-### Update 10/6//21 Later
-
-Added some logic to FtpLib recover a pointer to the certificate in the Application.  Don't have a clue
-what one could do with that information.
-
-### Update 10/6/21
-
-The program was doing something useful, so I spent a few hours trying to figure out to get it in GitHub.
-The problems was mostly about very large files, how to find them and delete them in OpenSSL.
-
-But, ...  This was a program in development.  I finally took the time to add comments here and there.
-The last update I had gone through the application project.  This update I've looked at the FtpLib
-project very carefully.  Yuk...  There was a lot of extra code in the modules that was there specifically
-to do debugging.  There was code that was needed to formulate ideas but was now clearly unimportant.
-There was code that was replicated all over the place and could be replaced with a simple change
-somewhere.  And a few comments were added here and there.
-
-### 10/4/21
-
-Added some comments, removed unused code, general cleanup...
-
 ## Getting Started
 
 This version was created with Visual Studion 2022.  It was compiled with the following properties:
@@ -204,10 +159,36 @@ The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
 
+### Update 3/15/23
+
+Complete move of orientation to reports.
+
 ### Update 3/8/23
 
 Added numbers to notepad archive output.   Fixed (hopefully) Print and Print Preview.  See MakeApp for
 details.
+
+### Update 10/28/22
+
+Start app in the same position and size as when it exited the last time.  Update the background of the
+toolbar.
+
+### Update 6/12/22
+
+Complete rewrite of the FtpLib obtained off the web.  One issue was the lack of a user molification
+output during long running sequences.  So the long running sequences were put into a "Worker Thread"
+and the function then sent an update to a "Progress Bar" in the UI Thread (the main Thread).  In one
+case the file that was transferred is also displayed in the main window just after the transfer takes
+place (with the usual caviot that Windows messages don't happen instantly).
+
+### Update 01/31/22
+
+Updates to the library, mostly about the toolbar, but also NewAllocator, and a minor addition to
+Expandable.
+
+Also scrubbed the project files to remove all references to precompiled header files which I turned off
+in VS17.  Unfortnately VS does not remove all references and pch files kept cropping up.  Not only does
+that slow down the compiler but the files are large...
 
 ### Update 12/18/21
 
@@ -238,6 +219,27 @@ get the length of a file given a path.
   - FineName -- Added a function to get the directory name of from a path
   - NewAllocator -- Corrected the debug dependency from if to ifdef
   - ToolBar -- Added data for drop down menus
+
+### Update 10/6//21 Later
+
+Added some logic to FtpLib recover a pointer to the certificate in the Application.  Don't have a clue
+what one could do with that information.
+
+### Update 10/6/21
+
+The program was doing something useful, so I spent a few hours trying to figure out to get it in GitHub.
+The problems was mostly about very large files, how to find them and delete them in OpenSSL.
+
+But, ...  This was a program in development.  I finally took the time to add comments here and there.
+The last update I had gone through the application project.  This update I've looked at the FtpLib
+project very carefully.  Yuk...  There was a lot of extra code in the modules that was there specifically
+to do debugging.  There was code that was needed to formulate ideas but was now clearly unimportant.
+There was code that was replicated all over the place and could be replaced with a simple change
+somewhere.  And a few comments were added here and there.
+
+### 10/4/21
+
+Added some comments, removed unused code, general cleanup...
 
 ## Authors
 

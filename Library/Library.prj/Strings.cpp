@@ -197,8 +197,6 @@ int ePos;
   }
 
 
-
-
 void ToAnsi::convert(TCchar* tp) {
 NewArray(char);
 
@@ -242,16 +240,4 @@ void ToUniCode::convert(Cchar* tp) {
 
 ToUniCode::~ToUniCode() {if (p) {delete [] p;}}
 
-
-
-#if 1
-#else
-#ifdef _UNICODE
-  wostringstream os;
-#else
-  ostringstream os;
-#endif
-
-  os << setw(width) << setprecision(precision) << v; return os.str();
-#endif
 

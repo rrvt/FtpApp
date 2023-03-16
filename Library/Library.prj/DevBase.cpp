@@ -58,7 +58,6 @@ DevBase& DevBase::operator<< (DsManipStg& m)
                       {m.func(*this, m.v);   NewAlloc(DsManipStg);   FreeNode(&m); return *this;}
 
 
-
 DevBase::DevBase() : vert(dvx), txtStk(*this), txt(txtStk.push()) {
   clear();
 
@@ -121,17 +120,14 @@ DevBase& DevBase::append(int   v) {txt->append(v); return *this; }
 DevBase& DevBase::append(ulong v) {txt->append(v); return *this;}
 
 
-DevBase& DevBase::operator<< (NoteNmbr& nn) {txt->set(nn);  (*txt)(NmbrAftr);   return *this;}
+DevBase& DevBase::operator<< (NoteNmbr& nn) {
 
-
-#if 0
-DevBase& DevBase::evalNmbr(NoteNmbr& nmbr) {
-  if (nmbr.width) {txt->set(nmbr);  (*txt)(NmbrAftr);}
-  else            {String s = nmbr.stg();  stg(s);}
+  if (!nn.width) {String s = nn.stg();  stg(s);}
+  else {txt->set(nn);  (*txt)(NmbrAftr);}
 
   return *this;
   }
-#endif
+
 
 void DevBase::tab() {txt->tab();}
 

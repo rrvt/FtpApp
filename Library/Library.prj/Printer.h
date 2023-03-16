@@ -26,6 +26,11 @@ enum PaperSize  {NilPprSz, LetterPprSz = DMPAPER_LETTER,     LetterSmallPprSz = 
                  A4_ExtraPprSz = DMPAPER_A4_EXTRA,
                  Letter_TransversePprSz = DMPAPER_LETTER_TRANSVERSE};
 
+extern TCchar* PortraitKey;
+extern TCchar* LandscapeKey;
+
+
+
 struct Printer {
 
 String     name;
@@ -47,8 +52,13 @@ double     scale;
               scale(0.0) { }
  ~Printer() { }
 
-  void load(TCchar* printer);
-  void store();
+  void       load(TCchar* printer);
+  void       store();
+
+  PrtrOrient toOrient(Cstring& cs);
+  TCchar*    toStg(PrtrOrient orient);
+
+  void       set(PrtrOrient o) {orient = o;}
   };
 
 extern Printer printer;

@@ -10,10 +10,6 @@ class FtpAppDoc;
 
 
 class FtpAppView : public CScrView {
-
-NotePadRpt dspNote;
-NotePadRpt prtNote;
-
 protected: // create from serialization only
 
   FtpAppView() noexcept;
