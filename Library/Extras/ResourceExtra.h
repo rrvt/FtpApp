@@ -25,14 +25,25 @@
 #define IDC_DspScale      518
 #define IDC_PrinterName   519
 #define IDC_PrtScale      520
-#define IDC_Orientation   521
-#define IDC_TopMargin     522
-#define IDC_BotMargin     523
-#define IDC_LeftMargin    524
-#define IDC_RightMargin   525
-#define IDC_LeftOdd       526
-#define IDC_RightOdd      527
-#define IDC_LeftEven      528
-#define IDC_RightEven     529
+#define IDC_TopMargin     521
+#define IDC_BotMargin     522
+#define IDC_LeftMargin    523
+#define IDC_RightMargin   524
+#define IDC_LeftOdd       525
+#define IDC_RightOdd      526
+#define IDC_LeftEven      527
+#define IDC_RightEven     528
+
+#define IDD_Orientation   530
+#define IDC_RptLabel0     531
+#define IDC_RptLabel1     532
+#define IDC_RptLabel2     533
+#define IDC_RptLabel3     534
+#define IDC_NtpdOrietn    535
+#define IDC_RptOrietn1    536
+#define IDC_RptOrietn2    537
+#define IDC_RptOrietn3    538
+#define ID_Orientation    539
+
 
 

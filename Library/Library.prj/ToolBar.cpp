@@ -133,7 +133,7 @@ TBMenuButton btn(id);
 
 
 void ToolBar::addCbxItems(uint id, CbxItem* items, int nItems, bool sorted) {
-TBBtnCtx& ctx = *findCtx(id);   if (!&ctx) return;
+TBBtnCtx& ctx = *findCtx(id);   if (!&ctx || !nItems) return;
 
   if (TBComboBox::addItems(id, items, nItems, ctx, sorted)) adjust(ctx);
   }

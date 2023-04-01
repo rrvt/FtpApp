@@ -141,7 +141,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Library\Extras\AboutDlg.h" />
-    <ClInclude Include="..\..\Library\Extras\ExtraResource.h" />
     <ClInclude Include="..\..\Library\Extras\OptionsDlg.h" />
     <ClInclude Include="FtpApp.h" />
     <ClInclude Include="FtpAppDoc.h" />
@@ -156,6 +155,8 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Utilities.h" />
+    <ClInclude Include="..\..\Library\Extras\ResourceExtra.h" />
+    <ClInclude Include="..\..\Library\Extras\RptOrientDlgOne.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Library\Extras\AboutDlg.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="SiteUpdateDlg.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="..\..\Library\Extras\RptOrientDlgOne.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FtpApp.rc" />
@@ -182,10 +184,10 @@
     <None Include="res\FtpApp.ico" />
     <None Include="res\FtpApp.rc2" />
     <None Include="res\Toolbar.bmp" />
-  <None Include="C:\Users\rrvt\AppData\Roaming\FtpApp\FtpApp.ini" />
+    <None Include="C:\Users\rrvt\AppData\Roaming\FtpApp\FtpApp.ini" />
     <None Include="C:\Users\rrvt\AppData\Roaming\FtpApp\swde.com.csv" />
+    <None Include="..\..\Library\Extras\RptOrientOne.rc2" />
   </ItemGroup>
-  
   <ItemGroup>
     <ProjectReference Include="..\..\Library\Library.prj\Library.vcxproj">
       <Project>{E663F373-7E55-4E77-B250-642C8B6A69CB}</Project>

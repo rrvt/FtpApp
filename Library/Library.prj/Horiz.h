@@ -44,7 +44,10 @@ public:
 
   void     clear();
 
-  void     initialize() {initPos();  setRtEdge();}
+  void     initialize() {setLftEdge();  setRtEdge();  maxPos = position = leftBnd;}
+  void     setEdges()   {setLftEdge();  setRtEdge();}
+  void     setLftEdge() {leftBnd  = dvx.leftMgn * dvx.edgeChWidth;}
+  void     setRtEdge()  {rightBnd = dvx.pgWidth - dvx.rightMgn * dvx.edgeChWidth;}
 
   double   pos()           {return position;}
   void     set(double pos) {position = pos;}
@@ -68,9 +71,6 @@ public:
   void cr();
 
 private:
-
-  void initPos()   {maxPos = position = leftBnd = dvx.leftMgn * dvx.avgLgChWidth;}
-  void setRtEdge() {         rightBnd = dvx.pgWidth - dvx.rightMgn * dvx.avgLgChWidth;}
 
   friend class  DevTabs;
   friend class  TxtOut;

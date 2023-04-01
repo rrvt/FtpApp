@@ -4,14 +4,14 @@
 #include "stdafx.h"
 #include "FtpApp.h"
 #include "AboutDlg.h"
-#include "ExtraResource.h"
 #include "filename.h"
 #include "Ftp.h"
+#include "FtpAppDoc.h"
+#include "FtpAppView.h"
 #include "IniFile.h"
 #include "MainFrame.h"
 #include "NotePad.h"
-#include "FtpAppDoc.h"
-#include "FtpAppView.h"
+#include "ResourceExtra.h"
 
 
 FtpApp  theApp;                       // The one and only FtpApp object

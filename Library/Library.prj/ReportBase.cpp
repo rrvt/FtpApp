@@ -32,3 +32,9 @@ void ReportBase::prtFooter(DevBase& dev, int pageNo) {
   }
 
 
+void ReportBase::txtOut(Archive& ar, double tabFactor) {setArchiveAttr(tabFactor); np.archive(ar);}
+
+
+void ReportBase::setArchiveAttr(double f)
+                               {int w = prtrOrietn == PortOrient ? 106 : 128;   np.setArchiveAttr(w, f);}
+

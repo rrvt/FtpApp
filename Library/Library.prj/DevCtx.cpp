@@ -9,7 +9,7 @@
 DevCtx::DevCtx() : dc(0), suppress(false), scale(1000),     //  savedDC(0),
                    pgWidth(0), rightMgn(0), leftMgn(0),
                    pgHeight(0),  topMgn(0),  botMgn(0),
-                   avgLgChWidth(1), avgFlChWidth(1),
+                   avgFlChWidth(1), avgLgChWidth(1), edgeChWidth(0),
                    chHeight(0), uLineDelta(0) { }
 
 
@@ -87,6 +87,8 @@ double     sum;
     avgLgChWidth = sum / n;
 
     avgFlChWidth = metric.tmAveCharWidth;   if (avgFlChWidth > avgLgChWidth) avgLgChWidth = avgFlChWidth;
+
+    if (!edgeChWidth) edgeChWidth = avgLgChWidth;
     }
   }
 
@@ -119,6 +121,7 @@ void DevCtx::saveDvx(DevCtxBkp& bkp) {
 
   bkp.avgFlChWidth = avgFlChWidth;
   bkp.avgLgChWidth = avgLgChWidth;
+  bkp.edgeChWidth  = edgeChWidth;
 
   bkp.chHeight     = chHeight;
   bkp.uLineDelta   = uLineDelta;
@@ -140,6 +143,7 @@ void DevCtx::restoreDvx(DevCtxBkp& bkp) {
 
   avgFlChWidth = bkp.avgFlChWidth;
   avgLgChWidth = bkp.avgLgChWidth;
+  edgeChWidth  = bkp.edgeChWidth;
 
   chHeight     = bkp.chHeight;
   uLineDelta   = bkp.uLineDelta;

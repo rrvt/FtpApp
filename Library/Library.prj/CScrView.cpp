@@ -34,8 +34,9 @@ void CScrView::OnInitialUpdate() {
   }
 
 
-void CScrView::initNoteOrietn()
-            {prtNote.prtrOrietn = (PrtrOrient) iniFile.readInt(RptOrietnSect, NoteOrietnKey, PortOrient);}
+void CScrView::initNoteOrietn() {
+  dspNote.prtrOrietn = prtNote.prtrOrietn =
+                                  (PrtrOrient) iniFile.readInt(RptOrietnSect, NoteOrietnKey, PortOrient);}
 
 
 void CScrView::saveNoteOrietn() {iniFile.write(RptOrietnSect, NoteOrietnKey, prtNote.prtrOrietn);}
@@ -44,6 +45,7 @@ void CScrView::saveNoteOrietn() {iniFile.write(RptOrietnSect, NoteOrietnKey, prt
 
 void CScrView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
                                     {dMgr.setScrollSize(); CScrollView::OnUpdate(pSender, lHint, pHint);}
+
 
 void CScrView::OnPrepareDC(CDC* dc, CPrintInfo* info) {
 
@@ -111,6 +113,8 @@ BOOL CScrView::OnPreparePrinting(CPrintInfo* pInfo) {
 bool          rslt;
 CPrintDialog* dlg;
 String        name;
+
+  onPreparePrinting(pInfo);
 
   if (pInfo->m_bPreview) {pInfo->m_nNumPreviewPages = 1;}
 

@@ -159,6 +159,10 @@ The /Release/FtpAppInstaller.msi will install the product.
 
 ## Updates
 
+### Update 3/31/23
+
+Add Report Orientation Dialog.
+
 ### Update 3/15/23
 
 Complete move of orientation to reports.

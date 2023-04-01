@@ -2,7 +2,7 @@
 
 
 #pragma once
-#include "ExtraResource.h"
+#include "ResourceExtra.h"
 #include "PrintMgr.h"
 
 
@@ -19,9 +19,6 @@ CEdit     dspSclCtrl;
 
 CComboBox printerNameCtrl;
 Cstring   printerName;
-
-CComboBox orientCtrl;
-Cstring   orient;
 
 Cstring   topMargin;
 Cstring   botMargin;

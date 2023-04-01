@@ -46,8 +46,8 @@ DevTab* cur;                  // points to current tab structure
   DevTabs(DevTabs& tm) {copy(tm);}
  ~DevTabs() { }
 
-  void   clear()   {cur = &dfltTab; data.clear();  dfltTab.clear();}
-  void   reset()   {cur = &dfltTab;}
+  void   clear()   {data.clear();  reset();}
+  void   reset()   {cur = &dfltTab;  dfltTab.clear();}
 
   DevTabs& operator= (DevTabs& tm) {copy(tm); return *this;}
 

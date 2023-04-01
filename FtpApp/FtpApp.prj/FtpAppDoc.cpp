@@ -3,7 +3,6 @@
 
 #include "stdafx.h"
 #include "FtpAppDoc.h"
-#include "ExtraResource.h"
 #include "filename.h"
 #include "Ftp.h"
 #include "FtpAppView.h"
@@ -12,6 +11,7 @@
 #include "MessageBox.h"
 #include "NotePad.h"
 #include "Resource.h"
+#include "ResourceExtra.h"
 #include "SiteFiles.h"
 #include "SiteUpdateDlg.h"
 #include "ToolBar.h"

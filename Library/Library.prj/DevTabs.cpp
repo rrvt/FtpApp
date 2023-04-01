@@ -29,7 +29,6 @@ double   lgChWidth = hz.avgLgChWidth();
 double   left      = hz.leftBnd;
 DvTbIter iter(*this);
 DevTab*  tab;
-//int    i;
 int      n;
 double   newCurPos;
 

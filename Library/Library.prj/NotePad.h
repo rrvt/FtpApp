@@ -25,9 +25,9 @@ NoteList noteList;
 Note*    note;
 int      noLines;
 
-int      arWidth;
-double   tabFactor;
-
+int      arWidth;                   // Width of output to a text file
+double   tabFactor;                 // n = tab * tabFactor where tab is an integer and n is the number
+                                    // of characters to move in the output text file.
 public:
 
   NotePad();
@@ -36,10 +36,6 @@ public:
   void clear();                         // To clear notepad for new input.
 
   bool append(Note* note) {noteList.append(note); return note->crlf;}
-
-//  bool isEmpty() {return !noLines;}
-
-//  int  getNoLines() {return noLines;}
 
   void setArchiveAttr(int w, double f = 1.0) {arWidth   = w; tabFactor = f;}
   void archive(Archive& ar);
@@ -69,21 +65,15 @@ private:
 
   void initialize();                          // Must open Notepad before first use.
 
-  NotePad& append(const String& line);// {getNote(EndLnNAttr).line += line.str();   return *this;}
-  NotePad& append(Cchar*        cs);//{ToUniCode uni(cs); getNote(EndLnNAttr).line += uni();  return *this;}
-//  NotePad& append(TCchar* line);//       {getNote(EndLnNAttr).line += line;         return *this;}
-  NotePad& append(Tchar       v);//      {getNote(EndLnNAttr).line += v;            return *this;}
+  NotePad& append(const String& line);
+  NotePad& append(Cchar*        cs);
+  NotePad& append(Tchar         v);
 
   NotePad& doNmbr(long   v);
   NotePad& doNmbr(ulong  v);
   NotePad& doNmbr(double v);
 
-//  NotePad& append(int         v);
-//  NotePad& append(long        v);
-//  NotePad& append(ulong       v);
-//  NotePad& append(double      v);
-
-  NotePad& append(Date        v);// {String s = v; return append(s);}
+  NotePad& append(Date    v);
   bool     doNumAttr(int& prec);
 
   NotePad& crlf();

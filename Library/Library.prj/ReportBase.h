@@ -8,6 +8,7 @@
 class CScrView;
 class DevBase;
 class NotePad;
+class Archive;
 
 
 
@@ -39,8 +40,11 @@ PrtrOrient prtrOrietn;
   virtual void prtHeader(DevBase& dev, int pageNo);
   virtual void prtFooter(DevBase& dev, int pageNo);
 
+  virtual void txtOut(Archive& ar, double tabFactor);
+
 protected:
 
+  virtual void setArchiveAttr(double f);
           void getPageAttr(CScrView& vw);
 
   virtual void getData(CScrView& vw) = 0;

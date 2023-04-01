@@ -30,7 +30,8 @@ void TxtOut::clear() {
   }
 
 
-void TxtOut::crlf() {dev.lf();   cr();   clipLine.setHzPos(horz.currentPos()); clipLine.close(dvx);}
+void TxtOut::crlf()
+        {dev.lf();   cr();   clrPositions();   clipLine.setHzPos(horz.currentPos()); clipLine.close(dvx);}
 
 
 bool TxtOut::operator() (AfterTxt after, double val, TCchar* tc) {
@@ -41,7 +42,7 @@ bool TxtOut::operator() (AfterTxt after, double val, TCchar* tc) {
 
     dev.incPageNo();
 
-    ops->setPosition(sum);
+    setPosition(sum);
 
     ops->start(wrapEnabled);
 
@@ -49,6 +50,24 @@ bool TxtOut::operator() (AfterTxt after, double val, TCchar* tc) {
     }
 
   ops->afterTxtOut();   freeOps();   return true;
+  }
+
+
+void TxtOut::setPosition(String& sum) {
+int     wth  = dvx.width(sum);
+DevTab& cur  = *devTabs.cur;
+bool    rTab = cur.right;
+
+  if (center) {horz.centerText(wth);              center = false;}
+  if (right)  {horz.rightText(wth);               right  = false;}
+  if (rTab)   {horz.rightTabText(cur.pos, wth);   devTabs.reset();}
+  }
+
+
+void TxtOut::clrPositions() {
+  center = false;
+  right  = false;
+  devTabs.reset();
   }
 
 

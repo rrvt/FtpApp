@@ -80,6 +80,9 @@ int       bkMaxHeight;                  // Backup Max character height to deal w
 
   bool     operator() (AfterTxt after, double val = 0, TCchar* fontFace = 0);
 
+  void     setPosition(String& sum);
+  void     clrPositions();
+
   void     clearOps();
   bool     isWrapFin() {return ops == 0;}
   void     cleanupWrap();

@@ -14,13 +14,10 @@ TxtOps::TxtOps(TxtOut& to, AfterTxt aftr, double aftrVal, TCchar* face) :
       txtOut(to),
       dvx(to.dvx),
       horz(to.horz),
-      devTabs(to.devTabs),
       vert(to.dev.vert),
       afterTxt(aftr),
       afterVal(aftrVal),
       fontFace(face ? face : _T("")),
-      center(to.center),
-      right(to.right),
       pos(0),
       wrap(dvx)
       { }
@@ -29,11 +26,7 @@ TxtOps::TxtOps(TxtOut& to, AfterTxt aftr, double aftrVal, TCchar* face) :
 TxtOps::~TxtOps() { }
 
 
-void TxtOps::clear() {
-  devTabs = *(DevTabs*)0; afterTxt = NilAftr;
-  afterVal = 0; fontFace.clear(); center =false; right = false; pos = 0;
-  wrap.clear();
-  }
+void TxtOps::clear() {afterTxt = NilAftr;   afterVal = 0;   fontFace.clear();   pos = 0;   wrap.clear();}
 
 
 void TxtOps::start(bool wrapEnabled) {wrap.set(wrapEnabled, horz.remaining(), horz.maxExtent());}
@@ -67,16 +60,6 @@ int    excess   = int(fldWidth - w);
   fragmentOut(s);
 
   if (nWidth < 0 && excess > 0) horz.move(excess);
-  }
-
-
-void TxtOps::setPosition(String& sum) {
-int  wth  = dvx.width(sum);
-bool rTab = devTabs.cur->right;
-
-  if (center) {horz.centerText(wth);                       center = false;}
-  if (right)  {horz.rightText(wth);                        right  = false;}
-  if (rTab)   {horz.rightTabText(devTabs.cur->pos, wth);   devTabs.reset();}
   }
 
 
@@ -117,9 +100,9 @@ void TxtOps::afterTxtOut() {
     case PopAftr      : dvx.pop();                  setMetric();                  break;
 
     case CRAftr       : horz.cr();                                                break;
-    case LeftAftr     : dvx.leftMgn = afterVal;  horz.initialize();               break;
+    case LeftAftr     : dvx.leftMgn = afterVal;  horz.setLftEdge();               break;
     case clrTbsAftr   : txtOut.devTabs.clear();                                   break;
-    case TabAftr      : tab(); findNextTab();                                     break;
+    case TabAftr      : txtOut.tab(); txtOut.findNextTab();                       break;
     case BegULAfter   : txtOut.undrLn.setBegin(horz.currentPos(), int(afterVal)); break;
     case EndULAftr    : txtOut.undrLn.setEnd(  horz.currentPos(), int(afterVal));
                         txtOut.undrLn.output(dvx);                                break;
@@ -133,6 +116,20 @@ void TxtOps::afterTxtOut() {
   }
 
 
-void TxtOps::setMetric() {horz.initialize(); vert.getMaxHeight();}
+void TxtOps::setMetric() {horz.setEdges(); vert.getMaxHeight();}
 
+
+
+
+#if 0
+void TxtOps::setPosition(String& sum) {
+int     wth  = dvx.width(sum);
+DevTab& cur  = *txtOut.devTabs.cur;
+bool    rTab = cur.right;
+
+  if (center) {horz.centerText(wth);              center = false;}
+  if (right)  {horz.rightText(wth);               right  = false;}
+  if (rTab)   {horz.rightTabText(cur.pos, wth);   txtOut.devTabs.reset();}
+  }
+#endif
 
